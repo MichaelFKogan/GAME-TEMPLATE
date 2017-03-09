@@ -47,51 +47,86 @@ BasicGame.Game.prototype = {
 // ORIGINAL CODE
 // ====================================================
 
-//  WORLD BOUNDARIES
+// ====================================================
+//  WORLD 
+
+    // BOUNDARIES
     this.game.world.setBounds(0, 0, this.game.width, this.game.height);
 
-//  The bounds of our physics simulation
+    // BORDER OUTLINE
     this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
-//  Just to display the bounds
     this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    this.graphics.lineStyle(2, 0xb30000, 1);
+    this.graphics.lineStyle(10, 0xb30000, 1);
     this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
 
-
-// ====================================================
-// ARCADE PHYSICS
+    // ARCADE PHYSICS
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-// BACKGROUND COLOR
-    this.game.stage.backgroundColor = '#eee';
-// ADD GROUP: BALLS
+
+    // BACKGROUND COLOR
+    this.game.stage.backgroundColor = '#666';
+
+// END WORLD
+// ====================================================
+
+// ====================================================
+// SPRITES
+
+    // ADD GROUP: BALLS
     this.balls = this.game.add.group();
-// CREATE BALLS
-// NUMBER OF BALLS
-    this.balls.createMultiple(2000, 'bullets', 0, false);
-    this.balls.scale.setTo(this.game.scaleRatio, this.game.scaleRatio);
+    // NUMBER OF BALLS
+    this.balls.createMultiple(400, 'bullets', 0, false);
+    // BALLS SIZE
+    this.balls.scale.setTo(this.game.scaleRatio * 4, this.game.scaleRatio * 4);
+    // BALL GRAVITY
+    this.game.physics.arcade.gravity.y = 200;
 
-// ADD SPRITE
-    this.atari = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'atari');
-    this.atari.anchor.set(0.5);
-    this.atari.scale.setTo(this.game.scaleRatio, this.game.scaleRatio);
-// ====================================================
+    // SPRITESHEET
+    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'dog');
+    this.player.anchor.set(0.5);
+    this.player.scale.setTo(this.game.scaleRatio / 3, this.game.scaleRatio / 3);
 
-// ====================================================
-// BALL GRAVITY
-    this.game.physics.arcade.gravity.y = 2000;
+    // SET PHYSICS TO PLAYER
+    // this.game.physics.arcade.enable(this.player);
 
-//  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
+    // PLAYER BOUNCE
+    // this.player.body.bounce.y = 0.2;
+    // this.player.body.gravity.y = 300;
+    // this.player.body.collideWorldBounds = true;
 
-// ADD PHYSICS TO EVERYTHING IN WORLD
+    // SPRITESHEET ANIMATIONS
+    //  Our two animations, walking left and right.
+    this.player.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    this.player.animations.add('right', [9, 10, 11, 12, 13, 14, 15], 10, true);
+
+    // this.player.animations.add('still', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+
+    // ADD PHYSICS TO EVERYTHING IN WORLD
+    //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
     this.game.physics.arcade.enable(this.game.world, true);
-// SPRITE GRAVITY
-    this.atari.body.allowGravity = 0;
-// SPRITE IMMOVABLE
-    this.atari.body.immovable = true;
-// ADD KEYBOARD
+
+    // SPRITE GRAVITY
+    this.player.body.allowGravity = 0;
+
+    // SPRITE IMMOVABLE
+    this.player.body.immovable = true;
+
+// END SPRITES
+// ====================================================
+
+// ====================================================
+// KEYBOARD
+    // ADD KEYBOARD
     this.cursors = this.game.input.keyboard.createCursorKeys();
-// LOOP GAME TIME EVENT
+// ====================================================
+
+    // LOOP GAME TIME EVENT
     this.game.time.events.loop(150, this.fire, this);
+
+// ====================================================
+// CAMERA
+    // this.game.camera.follow(this.player); //always center player
+// ====================================================
+
 },
 // ====================================================
 
@@ -141,16 +176,39 @@ reflect: function(a, ball) {
 // ====================================================
 	update: function () {
 
-    this.game.physics.arcade.collide(this.atari, this.balls, null, this.reflect);
+    this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
+    this.player.body.velocity.x = 0;
 
-    this.atari.body.velocity.x = 0;
+// MOVE CHARACTER LEFT AND RIGHT
+    this.LEFT = 0;
+    this.RIGHT = 1; 
 
-    if (this.cursors.left.isDown){
-        this.atari.body.velocity.x = -900;
-    }
-    else if (this.cursors.right.isDown){
-        this.atari.body.velocity.x = 900;
-    }
+        if (this.game.input.pointer1.isDown){          
+
+        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.LEFT) {        
+            this.player.body.velocity.x = -600;
+            this.player.animations.play('left');  
+            }    
+            
+        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.RIGHT) {            
+            this.player.body.velocity.x = 600;
+            this.player.animations.play('right');
+            }    
+        }
+
+        else{          
+            this.player.animations.stop();
+            // this.player.animations.play('still');
+
+            this.player.frame = 8;
+            }
+
+
+    //     //  Allow the player to jump if they are touching the ground.
+    // if (cursors.up.isDown && player.body.touching.down && hitPlatform)
+    // {
+    //     player.body.velocity.y = -350;
+    // }
 
     this.balls.forEachAlive(this.checkBounds, this);
 	},

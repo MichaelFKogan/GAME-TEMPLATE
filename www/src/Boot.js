@@ -31,7 +31,7 @@ BasicGame.Boot.prototype = {
 
 		this.game.scaleRatio = window.devicePixelRatio / 3;
 
-		this.input.maxPointers = 1;
+		this.input.maxPointers = 2;
 		this.stage.disableVisibilityChange = true;
 
 		BasicGame.orientated = true;
@@ -48,13 +48,13 @@ BasicGame.Boot.prototype = {
 		this.game.renderer.renderSession.roundPixels = true;
         this.game.time.desiredFps = 60;
 
-		if (this.game.device.desktop){
-			this.scale.maxWidth = this.game.width;
-			this.scale.maxHeight = this.game.height;
-			this.scale.setScreenSize(true);
-		}
+		// if (this.game.device.desktop){
+		// 	this.scale.maxWidth = this.game.width;
+		// 	this.scale.maxHeight = this.game.height;
+		// 	this.scale.setScreenSize(true);
+		// }
 
-		else{
+		// else{
 			this.scale.maxWidth = this.game.width * 2.5;
 			this.scale.maxHeight = this.game.height * 2.5;
 			
@@ -64,7 +64,7 @@ BasicGame.Boot.prototype = {
 			this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
 			this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
 			this.scale.setScreenSize(true);
-		}
+		// }
 
 // START CHECK ORIENTATION
 		this.state.start('CheckOrientation');
