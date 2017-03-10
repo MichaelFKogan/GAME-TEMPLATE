@@ -65,7 +65,10 @@ BasicGame.Preloader.prototype = {
 		this.load.image('board', 'images/board.png');
 
 // GAME
-	    this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
+		this.load.image('backgroundscene', 'assets/backgroundscene.png');
+	    // this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
+	    this.game.load.spritesheet('bullets', 'assets/ballspritesheet.png', 171, 174);
+
 	    this.game.load.spritesheet('dog', 'assets/dogspritesheet.png', 547, 481);
         
         this.load.image('gameover', 'images/gameover.png');
