@@ -27,6 +27,7 @@ BasicGame.Game.prototype = {
 
 	create: function () {
 
+// ====================================================
 // ORIGINAL CODE
 //         var self = this;
 // // SCORE
@@ -44,39 +45,92 @@ BasicGame.Game.prototype = {
 //         this.pauseboard = new Pauseboard(this.game);
 //         this.add.existing(this.pauseboard);
 // ORIGINAL CODE
+// ====================================================
 
-// ARCADE PHYSICS
+// ====================================================
+//  WORLD 
+
+    // BOUNDARIES
+    this.game.world.setBounds(0, 0, this.game.width, this.game.height);
+
+    // BORDER OUTLINE
+    this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
+    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
+    this.graphics.lineStyle(10, 0xb30000, 1);
+    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+
+    // ARCADE PHYSICS
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-// BACKGROUND COLOR
-    this.game.stage.backgroundColor = '#2d2d2d';
-// ADD GROUP: BALLS
+
+    // BACKGROUND COLOR
+    this.game.stage.backgroundColor = '#666';
+
+// END WORLD
+// ====================================================
+
+// ====================================================
+// SPRITES
+
+    // ADD GROUP: BALLS
     this.balls = this.game.add.group();
-// CREATE BALLS
-// NUMBER OF BALLS
-    this.balls.createMultiple(2000, 'bullets', 0, false);
-// ADD SPRITE
-    this.atari = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'atari');
-    this.atari.anchor.set(0.5);
-    this.atari.scale.set(0.6);
-// BALL GRAVITY
-    this.game.physics.arcade.gravity.y = 400;
+    // NUMBER OF BALLS
+    this.balls.createMultiple(400, 'bullets', 0, false);
+    // BALLS SIZE
+    this.balls.scale.setTo(this.game.scaleRatio * 4, this.game.scaleRatio * 4);
+    // BALL GRAVITY
+    this.game.physics.arcade.gravity.y = 200;
 
-//  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
+    // SPRITESHEET
+    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'dog');
+    this.player.anchor.set(0.5);
+    this.player.scale.setTo(this.game.scaleRatio / 3, this.game.scaleRatio / 3);
 
-// ADD PHYSICS TO EVERYTHING IN WORLD
+    // SET PHYSICS TO PLAYER
+    // this.game.physics.arcade.enable(this.player);
+
+    // PLAYER BOUNCE
+    // this.player.body.bounce.y = 0.2;
+    // this.player.body.gravity.y = 300;
+    // this.player.body.collideWorldBounds = true;
+
+    // SPRITESHEET ANIMATIONS
+    //  Our two animations, walking left and right.
+    this.player.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    this.player.animations.add('right', [9, 10, 11, 12, 13, 14, 15], 10, true);
+
+    // this.player.animations.add('still', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+
+    // ADD PHYSICS TO EVERYTHING IN WORLD
+    //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
     this.game.physics.arcade.enable(this.game.world, true);
-// SPRITE GRAVITY
-    this.atari.body.allowGravity = 0;
-// SPRITE IMMOVABLE
-    this.atari.body.immovable = true;
-// ADD KEYBOARD
+
+    // SPRITE GRAVITY
+    this.player.body.allowGravity = 0;
+
+    // SPRITE IMMOVABLE
+    this.player.body.immovable = true;
+
+// END SPRITES
+// ====================================================
+
+// ====================================================
+// KEYBOARD
+    // ADD KEYBOARD
     this.cursors = this.game.input.keyboard.createCursorKeys();
-// LOOP GAME TIME EVENT
+// ====================================================
+
+    // LOOP GAME TIME EVENT
     this.game.time.events.loop(150, this.fire, this);
 
-	},
+// ====================================================
+// CAMERA
+    // this.game.camera.follow(this.player); //always center player
+// ====================================================
 
+},
+// ====================================================
 
+// ====================================================
     fire: function() {
 
         this.ball = this.balls.getFirstExists(false);
@@ -88,8 +142,9 @@ BasicGame.Game.prototype = {
             this.ball.body.bounce.y = 0.8;
         }
     },
+// ====================================================
 
-
+// ====================================================
 reflect: function(a, ball) {
 
     // if (this.ball.y > (this.atari.y + 5)){
@@ -102,9 +157,9 @@ reflect: function(a, ball) {
         // return false;
     // }
 },
+// ====================================================
 
-
-
+// ====================================================
 // ORIGINAL CODE
     pause: function() {
         if (!this.game.soundMute) {
@@ -116,29 +171,58 @@ reflect: function(a, ball) {
         this.pauseboard.show();
     },
 // ORIGINAL CODE
+// ====================================================
 
+// ====================================================
 	update: function () {
 
-    this.game.physics.arcade.collide(this.atari, this.balls, null, this.reflect);
+    this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
+    this.player.body.velocity.x = 0;
 
-    this.atari.body.velocity.x = 0;
+// MOVE CHARACTER LEFT AND RIGHT
+    this.LEFT = 0;
+    this.RIGHT = 1; 
 
-    if (this.cursors.left.isDown){
-        this.atari.body.velocity.x = -200;
-    }
-    else if (this.cursors.right.isDown){
-        this.atari.body.velocity.x = 200;
-    }
+        if (this.game.input.pointer1.isDown){          
+
+        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.LEFT) {        
+            this.player.body.velocity.x = -600;
+            this.player.animations.play('left');  
+            }    
+            
+        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.RIGHT) {            
+            this.player.body.velocity.x = 600;
+            this.player.animations.play('right');
+            }    
+        }
+
+        else{          
+            this.player.animations.stop();
+            // this.player.animations.play('still');
+
+            this.player.frame = 8;
+            }
+
+
+    //     //  Allow the player to jump if they are touching the ground.
+    // if (cursors.up.isDown && player.body.touching.down && hitPlatform)
+    // {
+    //     player.body.velocity.y = -350;
+    // }
 
     this.balls.forEachAlive(this.checkBounds, this);
 	},
+// ====================================================
 
+// ====================================================
 // checkBounds: function (ball) {
 //     if (this.ball.y > 600){
 //         this.ball.kill();
 //     }
 // },
+// ====================================================
 
+// ====================================================
 	quitGame: function (pointer) {
 
 		//	Here you should destroy anything you no longer need.
@@ -147,6 +231,7 @@ reflect: function(a, ball) {
 		//	Then let's go back to the main menu.
 		this.state.start('MainMenu');
 	}
+// ====================================================
 
-};
+}; // END BasicGame.Game.prototype
 

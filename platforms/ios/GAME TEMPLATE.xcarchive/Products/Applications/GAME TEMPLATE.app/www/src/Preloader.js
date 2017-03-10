@@ -45,7 +45,6 @@ BasicGame.Preloader.prototype = {
         this.load.audio('gaHeartbeat', ['audio/heartbeat.mp3', 'audio/heartbeat.ogg']);
 
 // MAIN SCREEN
-        this.load.image('title', 'images/title.png');
         this.load.image('backgroundMenu', 'images/background_menu.png');
         this.load.image('play1', 'images/control-play.png');
         this.load.image('play2', 'images/control-play2.png');
@@ -62,16 +61,15 @@ BasicGame.Preloader.prototype = {
 		this.load.audio('titleMusic', ['audio/main_menu.mp3']);
 		
 		this.load.bitmapFont('gameFont', 'fonts/desyrel-pink.png', 'fonts/desyrel-pink.xml');
-		//	+ lots of other required assets here
 		this.load.image('background', 'images/background.png');
 		this.load.image('board', 'images/board.png');
 
-        // GAME
-	    this.game.load.image('atari', 'assets/atari130xe.png');
+// GAME
+	    // this.game.load.image('atari', 'assets/atari130xe.png');
 	    this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
-
+	    this.game.load.spritesheet('dog', 'assets/dogspritesheet.png', 547, 481);
+        
         this.load.image('gameover', 'images/gameover.png');
-
 
 	},
 

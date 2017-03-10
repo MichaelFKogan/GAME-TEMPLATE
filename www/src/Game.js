@@ -81,9 +81,9 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.gravity.y = 200;
 
     // SPRITESHEET
-    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.79, 'dog');
     this.player.anchor.set(0.5);
-    this.player.scale.setTo(this.game.scaleRatio / 3, this.game.scaleRatio / 3);
+    this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
 
     // SET PHYSICS TO PLAYER
     // this.game.physics.arcade.enable(this.player);
@@ -95,10 +95,14 @@ BasicGame.Game.prototype = {
 
     // SPRITESHEET ANIMATIONS
     //  Our two animations, walking left and right.
-    this.player.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
-    this.player.animations.add('right', [9, 10, 11, 12, 13, 14, 15], 10, true);
+    this.player.animations.add('left', [48, 47, 46, 45, 44, 43, 42, 41,], 16, true);
+    this.player.animations.add('right', [49, 50, 51, 52, 53, 54, 55, 56], 16, true);
 
-    // this.player.animations.add('still', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    this.player.animations.add('stillleft', [ 22, 23, 24, 25, 26, 27, 28, 29, 30], 16, true);
+    this.player.animations.add('stillright', [32, 33, 34, 35, 36, 37, 38, 39, 40], 16, true);
+
+    // this.player.animations.add('deadleft', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 20, true);
+    // this.player.animations.add('deadright', [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 20, true);
 
     // ADD PHYSICS TO EVERYTHING IN WORLD
     //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
@@ -179,29 +183,62 @@ reflect: function(a, ball) {
     this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
     this.player.body.velocity.x = 0;
 
-// MOVE CHARACTER LEFT AND RIGHT
-    this.LEFT = 0;
-    this.RIGHT = 1; 
-
-        if (this.game.input.pointer1.isDown){          
-
-        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.LEFT) {        
-            this.player.body.velocity.x = -600;
-            this.player.animations.play('left');  
-            }    
-            
-        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.RIGHT) {            
-            this.player.body.velocity.x = 600;
-            this.player.animations.play('right');
-            }    
-        }
-
-        else{          
-            this.player.animations.stop();
-            // this.player.animations.play('still');
-
-            this.player.frame = 8;
+        if (this.cursors.left.isDown)
+            {   
+                this.lastanimation = 'left';
+                this.player.body.velocity.x = -800;
+                this.player.animations.play('left');  
             }
+
+        else if (this.cursors.right.isDown)
+            {   
+                this.lastanimation = 'right';
+                this.player.body.velocity.x = 800;
+                this.player.animations.play('right');
+            }
+
+        else if(this.lastanimation == 'left' && this.cursors.left.isDown != true){         
+                    this.player.animations.play('stillleft');
+                }
+        else if(this.lastanimation == 'right' && this.cursors.right.isDown != true){
+                    this.player.animations.play('stillright');
+                }
+        else{this.player.animations.play('stillright');}
+
+
+
+
+// MOVE CHARACTER LEFT AND RIGHT
+    // this.LEFT = 0; 
+    // this.RIGHT = 1; 
+
+        // if(this.game.input.pointer1.isDown){ 
+        //         console.log("this.game.input.x: "+this.game.input.x); 
+        //         console.log("this.game.width: "+this.game.width);
+    //         if (Math.floor(this.game.input.x/(this.game.width/2)) === this.LEFT) {
+    //                 this.player.body.velocity.x = -700;
+    //                 this.player.animations.play('left');  
+    //             }    
+              
+    //         if (Math.floor(this.game.input.x/(this.game.width/2)) === this.RIGHT) {
+    //                 this.player.body.velocity.x = 700;
+    //                 this.player.animations.play('right'); 
+    //             }    
+        // }
+
+        // else{          
+        //     this.player.animations.stop();
+        //     // this.player.animations.play('still');
+
+        //     this.player.frame = 8;
+        //     }
+
+    //     else if(this.game.input.pointer1.isUp){   
+    //                 this.player.animations.stop();
+    //         // this.player.animations.play('still');
+
+    //         this.player.frame = 8;
+    //         } 
 
 
     //     //  Allow the player to jump if they are touching the ground.

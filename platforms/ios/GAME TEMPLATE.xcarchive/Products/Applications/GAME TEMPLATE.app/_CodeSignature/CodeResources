@@ -86,7 +86,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		7pWFcOiNPLNKHY+qRkKX5Fetn1g=
+		1nB9el877NjTV0Gf9P4HEkN72Zg=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		J/kuoLWpq40ko1ADcwc1PQTQLpE=
+		fIoT4gxxWShCSON1BEu8BVWsDWc=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		sV35AWsCKFcotTI3ibCUx/r/WxU=
+		dHrwmn6O69vSGH/zD42or00oA4U=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -180,13 +180,17 @@
 		<data>
 		SDCV2uMvDCVoWW/sZH5ohM8VDEc=
 		</data>
-		<key>www/assets/atari130xe.png</key>
-		<data>
-		s83VbEolLoaTOZMGiWb+4DlxRGU=
-		</data>
 		<key>www/assets/balls.png</key>
 		<data>
 		1aA6u0Ry2VZOwhcmcWaFpiaxtbI=
+		</data>
+		<key>www/assets/dogspritesheet.png</key>
+		<data>
+		mn/fkxc0G9WL0yv6ZfP7CGUpNHg=
+		</data>
+		<key>www/assets/dogstillspritesheet.png</key>
+		<data>
+		A7JV8O453CkC33pMOxVdtSE2ehg=
 		</data>
 		<key>www/audio/heartbeat.mp3</key>
 		<data>
@@ -296,17 +300,9 @@
 		<data>
 		nJ2XCDuCVg50HAg+KuqJKW4y/BA=
 		</data>
-		<key>www/images/board1.png</key>
-		<data>
-		IdSOJ6OrwOWxjFStq2FQc7H+U2Q=
-		</data>
 		<key>www/images/control-home.png</key>
 		<data>
 		vs9qB8hWMqNv53zDbMCkKLDwdPs=
-		</data>
-		<key>www/images/control-home1.png</key>
-		<data>
-		ZlPV7wW+ktWEGGc35Jr1FKwhMFU=
 		</data>
 		<key>www/images/control-home2.png</key>
 		<data>
@@ -316,10 +312,6 @@
 		<data>
 		ytbZIiud2k6//I9Bjbmhp9lTG50=
 		</data>
-		<key>www/images/control-pause1.png</key>
-		<data>
-		nhufkRpsqjmIIdYE8q/uQ+APbA4=
-		</data>
 		<key>www/images/control-pause2.png</key>
 		<data>
 		gss0GXI6pUIyAR+DiARYT5W+7WI=
@@ -327,10 +319,6 @@
 		<key>www/images/control-play.png</key>
 		<data>
 		d8aNcxfUiihsJ5g9+9j9gmF6CtQ=
-		</data>
-		<key>www/images/control-play1.png</key>
-		<data>
-		c1kTxHURK+rGoXKiCxxuiHaPAag=
 		</data>
 		<key>www/images/control-play2.png</key>
 		<data>
@@ -340,10 +328,6 @@
 		<data>
 		3i3MT6hdqJJBp1Y5fPsyqd1ZhCc=
 		</data>
-		<key>www/images/control-restart1.png</key>
-		<data>
-		8Tq6YcvsxFqCuAn+rnLz9asbWHk=
-		</data>
 		<key>www/images/control-restart2.png</key>
 		<data>
 		mT2ZrRUZSVOC3HnXqcWrOU8Zcp4=
@@ -352,17 +336,9 @@
 		<data>
 		xlzob7AYNj975QAbQksqvBNQSzc=
 		</data>
-		<key>www/images/control-sound-off1.png</key>
-		<data>
-		Pryk334dvk2VmBA775HLo2ZoVnU=
-		</data>
 		<key>www/images/control-sound-on.png</key>
 		<data>
 		vgkdJe7z7x8vo68n7Ek7vyXOILw=
-		</data>
-		<key>www/images/control-sound-on1.png</key>
-		<data>
-		Sil3H4Hoz9PiXWUPCppYmKQEihQ=
 		</data>
 		<key>www/images/flatLight12.png</key>
 		<data>
@@ -384,17 +360,9 @@
 		<data>
 		o2xleh4eejJSct/4IG3soDUMVuQ=
 		</data>
-		<key>www/images/preloader_background2.png</key>
-		<data>
-		2U+0y0jOABtDbSrcSb9H5uHSK1c=
-		</data>
 		<key>www/images/preloader_bar.png</key>
 		<data>
 		D7L66CD4NRyS6xnQjVL0wv4Wg+c=
-		</data>
-		<key>www/images/preloader_bar1.png</key>
-		<data>
-		0S/2tfpH6kxV//uioMi0yS4pRjs=
 		</data>
 		<key>www/images/preloader_bar_gray.png</key>
 		<data>
@@ -403,10 +371,6 @@
 		<key>www/images/preloader_bar_gray1.png</key>
 		<data>
 		88q52/b27c2dQtV1XxJIzGg5odg=
-		</data>
-		<key>www/images/title.png</key>
-		<data>
-		6gsfTeD9tWVZ/kxYnNh8ioPmVkU=
 		</data>
 		<key>www/img/logo.png</key>
 		<data>
@@ -430,7 +394,7 @@
 		</data>
 		<key>www/src/Boot.js</key>
 		<data>
-		n7mC+wvSr40vWewTxvNiSaBBdsI=
+		YenN0mQxjwhSRPL1oqZCJnp2Ajs=
 		</data>
 		<key>www/src/CheckOrientation.js</key>
 		<data>
@@ -438,7 +402,7 @@
 		</data>
 		<key>www/src/Game.js</key>
 		<data>
-		VsQ8ZMEOOdsBfgUDflp1oJtKPe0=
+		ly/I2Dp1ZvZQ4XeJ0hzyxl3a+UE=
 		</data>
 		<key>www/src/GamersAssociate.js</key>
 		<data>
@@ -454,7 +418,7 @@
 		</data>
 		<key>www/src/Preloader.js</key>
 		<data>
-		5aL8VRdHnOpulKxsyR1FoFgchn4=
+		dQRJEEz7hnUrg5igiUax9ZRvebQ=
 		</data>
 		<key>www/src/Scoreboard.js</key>
 		<data>
@@ -470,7 +434,7 @@
 		</data>
 		<key>www/src/Start.js</key>
 		<data>
-		hLhwqqtabloGBDAAnNR6ygTHTAk=
+		8S4ExesT6DkqRMPkdKo1q57leq8=
 		</data>
 		<key>www/svg/control-home.svg</key>
 		<data>
@@ -727,11 +691,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7pWFcOiNPLNKHY+qRkKX5Fetn1g=
+			1nB9el877NjTV0Gf9P4HEkN72Zg=
 			</data>
 			<key>hash2</key>
 			<data>
-			mNjUqIzTqEZIS9p317c4Wf1z2RMLTX8OHUeZ0l7LGYw=
+			068DGF6WY2vzpStAyM8lOIkSGeBIhT25XxV0S4niIl4=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -749,11 +713,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			J/kuoLWpq40ko1ADcwc1PQTQLpE=
+			fIoT4gxxWShCSON1BEu8BVWsDWc=
 			</data>
 			<key>hash2</key>
 			<data>
-			LBKlS6fMGwgWh927JB/DVUHyhcwWDsseFOhL8tLiajw=
+			cU6WzDzbaqOpvOEjk8qjQVh7N5t3M8DZvMjGomZ6nWA=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -914,11 +878,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sV35AWsCKFcotTI3ibCUx/r/WxU=
+			dHrwmn6O69vSGH/zD42or00oA4U=
 			</data>
 			<key>hash2</key>
 			<data>
-			DIwuSddQNsHAMsUq5qVqP8IEnDAZRv4eATlhjV/uuyQ=
+			lDBumHBLGwsu1aG5UlleR9Jnyc7rIoxhP8kxTfDtNUI=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -965,17 +929,6 @@
 			o5td5IPBvxzSEsA/pS9MfeKuUGUNXm8+0/CwttTMg+M=
 			</data>
 		</dict>
-		<key>www/assets/atari130xe.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			s83VbEolLoaTOZMGiWb+4DlxRGU=
-			</data>
-			<key>hash2</key>
-			<data>
-			bSv7Oy7e18Mr6rOafLozlE0TPFbKMfpYtdzrpdK/Imw=
-			</data>
-		</dict>
 		<key>www/assets/balls.png</key>
 		<dict>
 			<key>hash</key>
@@ -985,6 +938,28 @@
 			<key>hash2</key>
 			<data>
 			Jq0jn7DRFJCiBfvChSRzVGgYmetRNil5Ac24Y61krkc=
+			</data>
+		</dict>
+		<key>www/assets/dogspritesheet.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			mn/fkxc0G9WL0yv6ZfP7CGUpNHg=
+			</data>
+			<key>hash2</key>
+			<data>
+			8rpiF7E/A5L5NB9j55SyDuu39jc3+ZD48Wu0d8Vn0Rk=
+			</data>
+		</dict>
+		<key>www/assets/dogstillspritesheet.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			A7JV8O453CkC33pMOxVdtSE2ehg=
+			</data>
+			<key>hash2</key>
+			<data>
+			72N9O4162G/1UZilcAPNYM16AQDEWqD9koOqvDVIWYg=
 			</data>
 		</dict>
 		<key>www/audio/heartbeat.mp3</key>
@@ -1284,17 +1259,6 @@
 			NXjNHTmFWPZMBNqUNacglDjfSixAaGvdIeHOF7l1apE=
 			</data>
 		</dict>
-		<key>www/images/board1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			IdSOJ6OrwOWxjFStq2FQc7H+U2Q=
-			</data>
-			<key>hash2</key>
-			<data>
-			AfQ6LI7BptImtVgKL8FRndOzaRZpE5FwjKr2nLFGWv0=
-			</data>
-		</dict>
 		<key>www/images/control-home.png</key>
 		<dict>
 			<key>hash</key>
@@ -1304,17 +1268,6 @@
 			<key>hash2</key>
 			<data>
 			OqapN6cFvAQtysuZXMqU5rsanD/EjvocLF62EyM71ak=
-			</data>
-		</dict>
-		<key>www/images/control-home1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ZlPV7wW+ktWEGGc35Jr1FKwhMFU=
-			</data>
-			<key>hash2</key>
-			<data>
-			5lLeoqyi1XjuHHqiUhENnPS4a0qexWCU8vmRRhnqAa4=
 			</data>
 		</dict>
 		<key>www/images/control-home2.png</key>
@@ -1339,17 +1292,6 @@
 			fZTYWaMb9T5LTnkegLhDaJg6M6gHcGOr8aL/lybYkoU=
 			</data>
 		</dict>
-		<key>www/images/control-pause1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			nhufkRpsqjmIIdYE8q/uQ+APbA4=
-			</data>
-			<key>hash2</key>
-			<data>
-			WzTwRoSmMfo8LNDm9vwS2+oPegGPGvJkm0llOU9TxaY=
-			</data>
-		</dict>
 		<key>www/images/control-pause2.png</key>
 		<dict>
 			<key>hash</key>
@@ -1370,17 +1312,6 @@
 			<key>hash2</key>
 			<data>
 			v7Q/Ov9wMPY3sGW41PbCItqrvUZeHYG1Iu0fmKaiyaI=
-			</data>
-		</dict>
-		<key>www/images/control-play1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			c1kTxHURK+rGoXKiCxxuiHaPAag=
-			</data>
-			<key>hash2</key>
-			<data>
-			7uDwpZA3Jin8CqXqnqqrtvifMTn/Puw/RPuvhkC2SVU=
 			</data>
 		</dict>
 		<key>www/images/control-play2.png</key>
@@ -1405,17 +1336,6 @@
 			yRjmz2U/5NmsUoeq3UQsNLsXOR5L4tvNTOrkV+UIa+8=
 			</data>
 		</dict>
-		<key>www/images/control-restart1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			8Tq6YcvsxFqCuAn+rnLz9asbWHk=
-			</data>
-			<key>hash2</key>
-			<data>
-			VuekP4Csofnref9Y3smRaBYXQG5Fgq9a/Af5dulhPQM=
-			</data>
-		</dict>
 		<key>www/images/control-restart2.png</key>
 		<dict>
 			<key>hash</key>
@@ -1438,17 +1358,6 @@
 			Mu/h2KG3++pOcCpRTITCxoH5SrLNcRqoHB4ETNZhen8=
 			</data>
 		</dict>
-		<key>www/images/control-sound-off1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Pryk334dvk2VmBA775HLo2ZoVnU=
-			</data>
-			<key>hash2</key>
-			<data>
-			VfgdKH9JQbzMnGxIpU78ZR6BHaGW8u3YMinwk1pA0Jw=
-			</data>
-		</dict>
 		<key>www/images/control-sound-on.png</key>
 		<dict>
 			<key>hash</key>
@@ -1458,17 +1367,6 @@
 			<key>hash2</key>
 			<data>
 			KXfAi+7BTa6Y0HXkyXlSTNNXjdRayO7Upr7k7Q57i2U=
-			</data>
-		</dict>
-		<key>www/images/control-sound-on1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Sil3H4Hoz9PiXWUPCppYmKQEihQ=
-			</data>
-			<key>hash2</key>
-			<data>
-			OCH3rIzf/sLfDi2rU3Ka/45hsXN6qu4HKfli3IQuqOs=
 			</data>
 		</dict>
 		<key>www/images/flatLight12.png</key>
@@ -1526,17 +1424,6 @@
 			5PPOKBO0u8IMB71Sp5bksfwcgQAnlBMbbU82adkRJwg=
 			</data>
 		</dict>
-		<key>www/images/preloader_background2.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2U+0y0jOABtDbSrcSb9H5uHSK1c=
-			</data>
-			<key>hash2</key>
-			<data>
-			i4XDOVi9G7D+goTD9mQ1OKUZtDiU1/ztzcZxtjUMmmc=
-			</data>
-		</dict>
 		<key>www/images/preloader_bar.png</key>
 		<dict>
 			<key>hash</key>
@@ -1546,17 +1433,6 @@
 			<key>hash2</key>
 			<data>
 			Yg40LWjOE6lX6hWB4JyRwUgEtBS/NNoZ5L3o+zB9rcE=
-			</data>
-		</dict>
-		<key>www/images/preloader_bar1.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			0S/2tfpH6kxV//uioMi0yS4pRjs=
-			</data>
-			<key>hash2</key>
-			<data>
-			4VW2ZwC50ujTjPNEWkHRE9DDoGIoK5IoBUKxfzZo4c0=
 			</data>
 		</dict>
 		<key>www/images/preloader_bar_gray.png</key>
@@ -1579,17 +1455,6 @@
 			<key>hash2</key>
 			<data>
 			Zh5MLCB98J28Z5W/FwYxdg9q7KAv3pMtoNIpafVW7Zk=
-			</data>
-		</dict>
-		<key>www/images/title.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			6gsfTeD9tWVZ/kxYnNh8ioPmVkU=
-			</data>
-			<key>hash2</key>
-			<data>
-			EXxx7mDJL/NIqVdLpsKqjZU/iBvo3ktzopQaXwsoX+c=
 			</data>
 		</dict>
 		<key>www/img/logo.png</key>
@@ -1651,11 +1516,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			n7mC+wvSr40vWewTxvNiSaBBdsI=
+			YenN0mQxjwhSRPL1oqZCJnp2Ajs=
 			</data>
 			<key>hash2</key>
 			<data>
-			iRe1DW4WBom8KWjLYuJVfsm7nPAljugfVwlipklTRdA=
+			GibP1WkTgvfMO43VyXZeJMsFR2KSa8hTV26UdEEnayU=
 			</data>
 		</dict>
 		<key>www/src/CheckOrientation.js</key>
@@ -1673,11 +1538,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VsQ8ZMEOOdsBfgUDflp1oJtKPe0=
+			ly/I2Dp1ZvZQ4XeJ0hzyxl3a+UE=
 			</data>
 			<key>hash2</key>
 			<data>
-			1+g1SMpIKcLdPCbkxn5233DkgK9XVd9UPhVPowqo38I=
+			eSJ0+EsRdsYDwpji45WrKY4acAJgQZbAwdYctShjyxA=
 			</data>
 		</dict>
 		<key>www/src/GamersAssociate.js</key>
@@ -1717,11 +1582,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5aL8VRdHnOpulKxsyR1FoFgchn4=
+			dQRJEEz7hnUrg5igiUax9ZRvebQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			UY1O6i9QSfocXF6Bm52vgPkduLyWSgYP8cM3rQD57Do=
+			ZuSrZ1/9T+859rutRqabSlUeQShyrHWA3qJlUbiGx34=
 			</data>
 		</dict>
 		<key>www/src/Scoreboard.js</key>
@@ -1761,11 +1626,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hLhwqqtabloGBDAAnNR6ygTHTAk=
+			8S4ExesT6DkqRMPkdKo1q57leq8=
 			</data>
 			<key>hash2</key>
 			<data>
-			KZNPanfSRlggooYgNshry8HDxDRtD5D8KOWqJY5SRCI=
+			5dhPS5jeJcSPwo0jKMDgrmr6FV/2G2kXMDVUl1wZf3U=
 			</data>
 		</dict>
 		<key>www/svg/control-home.svg</key>

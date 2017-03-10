@@ -65,7 +65,6 @@ BasicGame.Preloader.prototype = {
 		this.load.image('board', 'images/board.png');
 
 // GAME
-	    // this.game.load.image('atari', 'assets/atari130xe.png');
 	    this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
 	    this.game.load.spritesheet('dog', 'assets/dogspritesheet.png', 547, 481);
         

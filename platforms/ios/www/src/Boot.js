@@ -29,35 +29,42 @@ BasicGame.Boot.prototype = {
 
 	create: function () {
 
-		this.input.maxPointers = 1;
+		this.game.scaleRatio = window.devicePixelRatio / 3;
+
+		this.input.maxPointers = 2;
 		this.stage.disableVisibilityChange = true;
 
 		BasicGame.orientated = true;
-
+		// this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 
-		this.scale.minWidth = this.game.width / 2;
-		this.scale.minHeight = this.game.height / 2;
+		// this.scale.minWidth = this.game.width ;
+		// this.scale.minHeight = this.game.height ;
+
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
 
-		if (this.game.device.desktop){
-			this.scale.maxWidth = this.game.width;
-			this.scale.maxHeight = this.game.height;
-			this.scale.setScreenSize(true);
-		}
+		        //Pixel Art
+		this.game.renderer.renderSession.roundPixels = true;
+        this.game.time.desiredFps = 60;
 
-		else{
+		// if (this.game.device.desktop){
+		// 	this.scale.maxWidth = this.game.width;
+		// 	this.scale.maxHeight = this.game.height;
+		// 	this.scale.setScreenSize(true);
+		// }
+
+		// else{
 			this.scale.maxWidth = this.game.width * 2.5;
 			this.scale.maxHeight = this.game.height * 2.5;
 			
-			this.scale.forceOrientation(true, false);
+			this.scale.forceOrientation(false, false);
 			this.scale.hasResized.add(this.gameResized, this);
 			
 			this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
 			this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
 			this.scale.setScreenSize(true);
-		}
+		// }
 
 // START CHECK ORIENTATION
 		this.state.start('CheckOrientation');
