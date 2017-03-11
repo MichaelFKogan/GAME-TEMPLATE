@@ -53,6 +53,10 @@ BasicGame.Game.prototype = {
     // BOUNDARIES
     this.game.world.setBounds(0, 0, this.game.width, this.game.height);
 
+    // BACKGROUND
+    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'backgroundscene');
+    this.background.fixedToCamera = true;
+
     // BORDER OUTLINE
     this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
     this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
@@ -62,10 +66,7 @@ BasicGame.Game.prototype = {
     // ARCADE PHYSICS
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-    // BACKGROUND COLOR
-    this.game.stage.backgroundColor = '#666';
-
-// END WORLD
+// END WORLD SETTINGS
 // ====================================================
 
 // ====================================================
@@ -76,14 +77,18 @@ BasicGame.Game.prototype = {
     // NUMBER OF BALLS
     this.balls.createMultiple(400, 'bullets', 0, false);
     // BALLS SIZE
-    this.balls.scale.setTo(this.game.scaleRatio * 4, this.game.scaleRatio * 4);
+    this.balls.scale.setTo(this.game.scaleRatio / 4, this.game.scaleRatio / 4);
     // BALL GRAVITY
-    this.game.physics.arcade.gravity.y = 200;
+    this.game.physics.arcade.gravity.y = 1200;
+
 
     // SPRITESHEET
-    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY * 1.93, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX / 4, this.game.world.centerY * 1.79, 'dog');
     this.player.anchor.set(0.5);
-    this.player.scale.setTo(this.game.scaleRatio / 3, this.game.scaleRatio / 3);
+    this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
+    
+    this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
+    this.player.body.collideWorldBounds = true;
 
     // SET PHYSICS TO PLAYER
     // this.game.physics.arcade.enable(this.player);
@@ -95,10 +100,9 @@ BasicGame.Game.prototype = {
 
     // SPRITESHEET ANIMATIONS
     //  Our two animations, walking left and right.
-    this.player.animations.add('left', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
-    this.player.animations.add('right', [9, 10, 11, 12, 13, 14, 15], 10, true);
-
-    // this.player.animations.add('still', [0, 1, 2, 3, 4, 5, 6, 7, 8], 10, true);
+    this.player.animations.add('dogidleright', [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 16, true);
+    this.player.animations.add('dogrunright', [18, 19, 20, 21, 22, 23, 24, 25], 16, true);
+    this.player.animations.add('dogrunleft', [10, 11, 12, 13, 14, 15, 16, 17], 16, true);
 
     // ADD PHYSICS TO EVERYTHING IN WORLD
     //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
@@ -124,9 +128,17 @@ BasicGame.Game.prototype = {
 
 // ====================================================
 // CAMERA
-    // this.game.camera.follow(this.player); //always center player
+    // this.game.camera.follow(this.player); 
+    // this.game.camera.deadzone = new Phaser.Rectangle(0, (this.game.height/2) + (this.game.height/4), (this.game.width/2) + (this.game.width/8), this.game.height/4);
 // ====================================================
 
+// ====================================================
+// SENSORS
+                this.sensors = this.game.add.group();
+                this.sensors.enableBody = true;
+// ====================================================
+
+    this.START = false;
 },
 // ====================================================
 
@@ -176,42 +188,36 @@ reflect: function(a, ball) {
 // ====================================================
 	update: function () {
 
+// RUNNING ON TAP
     this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
     this.player.body.velocity.x = 0;
 
-// MOVE CHARACTER LEFT AND RIGHT
-    this.LEFT = 0;
-    this.RIGHT = 1; 
-
-        if (this.game.input.pointer1.isDown){          
-
-        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.LEFT) {        
-            this.player.body.velocity.x = -600;
-            this.player.animations.play('left');  
-            }    
-            
-        if (Math.floor(this.game.input.x/(this.game.width/2)) === this.RIGHT) {            
-            this.player.body.velocity.x = 600;
-            this.player.animations.play('right');
-            }    
+        if(this.START == false){
+        this.player.animations.play('dogidleright');
         }
+            if (this.cursors.right.isDown){   
+            // if (this.game.input.pointer1.isDown){   
+                    this.START = true;
+                    this.player.body.velocity.x = 450;
+                    this.player.animations.play('dogrunright');
+                }
 
-        else{          
-            this.player.animations.stop();
-            // this.player.animations.play('still');
-
-            this.player.frame = 8;
-            }
-
-
-    //     //  Allow the player to jump if they are touching the ground.
-    // if (cursors.up.isDown && player.body.touching.down && hitPlatform)
-    // {
-    //     player.body.velocity.y = -350;
-    // }
+            else if(this.START == true){
+                    this.player.body.velocity.x = -450;
+                    this.player.animations.play('dogrunleft');
+                }
 
     this.balls.forEachAlive(this.checkBounds, this);
-	},
+
+
+// BACKGROUND IMAGE MOVE WITH CAMERA
+    if (!this.game.camera.atLimit.x)
+    {this.background.tilePosition.x -= ((this.player.body.velocity.x/24) * this.game.time.physicsElapsed);}
+
+    // if (!this.game.camera.atLimit.y)
+    // {this.background.tilePosition.y -= ((this.player.body.velocity.y/16) * this.game.time.physicsElapsed);}
+
+	}, // END UPDATE
 // ====================================================
 
 // ====================================================
@@ -230,8 +236,22 @@ reflect: function(a, ball) {
 
 		//	Then let's go back to the main menu.
 		this.state.start('MainMenu');
-	}
+	},
 // ====================================================
+
+render: function() {
+// DEADZONE - Rectangle that defines the limits at which the camera will scroll
+    // this.zone = this.game.camera.deadzone;
+    // this.game.context.fillStyle = 'rgba(255,0,0,0.6)';
+    // this.game.context.fillRect(this.zone.x, this.zone.y, this.zone.width, this.zone.height);
+
+// DEBUG PLAYER
+this.game.debug.body(this.player);
+this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), '#FFFF00');
+
+this.game.debug.body(this.balls);
+this.game.debug.geom(new Phaser.Point(this.balls.x, this.balls.y), '#FFFF00');
+}
 
 }; // END BasicGame.Game.prototype
 

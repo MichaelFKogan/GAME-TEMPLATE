@@ -94,6 +94,7 @@ BasicGame.Preloader.prototype = {
 		//	the update function completely.
 		
 		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
+
 		{
 			
 // START LOGO SCREEN
@@ -105,8 +106,7 @@ BasicGame.Preloader.prototype = {
 			// MAIN MENU AUDIO
 		this.game.music = this.add.audio('titleMusic');
         this.game.soundMute = false;
-        
-        this.game.music.play();
+        this.game.music.play("", 0, 1, true, true);
         this.game.music.loop = true;
 		}
 	}

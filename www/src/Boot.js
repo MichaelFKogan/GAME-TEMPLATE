@@ -31,18 +31,32 @@ BasicGame.Boot.prototype = {
 
 		this.game.scaleRatio = window.devicePixelRatio / 3;
 
+    	console.log("// =======================================")
+		console.log("1 ) this.game.width: "+this.game.width)
+		console.log("2 ) this.game.height: "+this.game.height)
+    	console.log("// =======================================")
+
 		this.input.maxPointers = 2;
 		this.stage.disableVisibilityChange = true;
 
 		BasicGame.orientated = true;
+
 		// this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+		// this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		// this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
+		// this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
-		// this.scale.minWidth = this.game.width ;
-		// this.scale.minHeight = this.game.height ;
+		// this.scale.minWidth = this.game.width;
+		// this.scale.minHeight = this.game.height;
+
+		// this.scale.maxWidth = this.game.width;
+		// this.scale.maxHeight = this.game.height;
 
 		this.scale.pageAlignHorizontally = true;
 		this.scale.pageAlignVertically = true;
+
+		this.game.scale.refresh();
 
 		        //Pixel Art
 		this.game.renderer.renderSession.roundPixels = true;

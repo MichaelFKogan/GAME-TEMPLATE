@@ -86,7 +86,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		1nB9el877NjTV0Gf9P4HEkN72Zg=
+		XLVES7AU8ssrLRf7wvL64Nd6MUU=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		fIoT4gxxWShCSON1BEu8BVWsDWc=
+		QxOEeT7gvUCcG1HYpY7xkfnIlyM=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		dHrwmn6O69vSGH/zD42or00oA4U=
+		gL0AKu5uaFMllx+FYgUUUc+SJdc=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -180,17 +180,57 @@
 		<data>
 		SDCV2uMvDCVoWW/sZH5ohM8VDEc=
 		</data>
+		<key>www/assets/Button copy 2.png</key>
+		<data>
+		Q5eZI6I+Yci5ZNVIo7wMhWEFUkk=
+		</data>
+		<key>www/assets/Button copy.png</key>
+		<data>
+		Qhj02GgJeGG5zyQqleZxYdJWpN0=
+		</data>
+		<key>www/assets/Windows copy 2.png</key>
+		<data>
+		8B5ZPMImqJthvD4iMGhnDf6vpYQ=
+		</data>
+		<key>www/assets/Windows copy 3.png</key>
+		<data>
+		9/K57QnFOwsv4aKOhzzWTku+W3w=
+		</data>
+		<key>www/assets/Windows copy.png</key>
+		<data>
+		yYDjxMtaCTYC+J+3TbMRYtU8ySg=
+		</data>
+		<key>www/assets/backgroundscene.png</key>
+		<data>
+		XAGkw/yNVNDBlZeYrwIUrpBu/t0=
+		</data>
 		<key>www/assets/balls.png</key>
 		<data>
 		1aA6u0Ry2VZOwhcmcWaFpiaxtbI=
 		</data>
+		<key>www/assets/ballspritesheet.png</key>
+		<data>
+		PIYOrgyox+98SFvrBgYc2x1cxQk=
+		</data>
 		<key>www/assets/dogspritesheet.png</key>
 		<data>
-		mn/fkxc0G9WL0yv6ZfP7CGUpNHg=
+		rAaTZAOP8OhT3S7Qac5liEhhUfo=
 		</data>
-		<key>www/assets/dogstillspritesheet.png</key>
+		<key>www/assets/greenball.png</key>
 		<data>
-		A7JV8O453CkC33pMOxVdtSE2ehg=
+		5DAUMOtJrhX6pu7HxxANhB8fN3I=
+		</data>
+		<key>www/assets/greyball.png</key>
+		<data>
+		b8MwIW2sAvRwekS9ERwLcz3qbIA=
+		</data>
+		<key>www/assets/redball.png</key>
+		<data>
+		Phm/aaCpbPMCZEBgLyiPjl5dN0k=
+		</data>
+		<key>www/assets/yellowball.png</key>
+		<data>
+		wlB4j5DTmB3tsEjKfTI4N6kchSI=
 		</data>
 		<key>www/audio/heartbeat.mp3</key>
 		<data>
@@ -394,7 +434,7 @@
 		</data>
 		<key>www/src/Boot.js</key>
 		<data>
-		YenN0mQxjwhSRPL1oqZCJnp2Ajs=
+		lki3ehioFEaIuWtlX9d2F/I2hec=
 		</data>
 		<key>www/src/CheckOrientation.js</key>
 		<data>
@@ -402,7 +442,7 @@
 		</data>
 		<key>www/src/Game.js</key>
 		<data>
-		ly/I2Dp1ZvZQ4XeJ0hzyxl3a+UE=
+		wshh53kg2jvJIpnc5rSs46pLDDI=
 		</data>
 		<key>www/src/GamersAssociate.js</key>
 		<data>
@@ -418,7 +458,7 @@
 		</data>
 		<key>www/src/Preloader.js</key>
 		<data>
-		dQRJEEz7hnUrg5igiUax9ZRvebQ=
+		b5bnMhnaZNromxuRDk2unv1PiWo=
 		</data>
 		<key>www/src/Scoreboard.js</key>
 		<data>
@@ -691,11 +731,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1nB9el877NjTV0Gf9P4HEkN72Zg=
+			XLVES7AU8ssrLRf7wvL64Nd6MUU=
 			</data>
 			<key>hash2</key>
 			<data>
-			068DGF6WY2vzpStAyM8lOIkSGeBIhT25XxV0S4niIl4=
+			ajaePuRmn1VVDva9lBSqQ615+v6VFeyIx4kFWNYohM0=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -713,11 +753,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fIoT4gxxWShCSON1BEu8BVWsDWc=
+			QxOEeT7gvUCcG1HYpY7xkfnIlyM=
 			</data>
 			<key>hash2</key>
 			<data>
-			cU6WzDzbaqOpvOEjk8qjQVh7N5t3M8DZvMjGomZ6nWA=
+			ZffZ9E32Xso2X2nIlZth4lduomlsH6aiW9Qfs36rSwg=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -878,11 +918,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dHrwmn6O69vSGH/zD42or00oA4U=
+			gL0AKu5uaFMllx+FYgUUUc+SJdc=
 			</data>
 			<key>hash2</key>
 			<data>
-			lDBumHBLGwsu1aG5UlleR9Jnyc7rIoxhP8kxTfDtNUI=
+			bTUSq0dm/XQMJ5f8XD9BgTntTX/+jYAgGX4GFdVBD3A=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -929,6 +969,72 @@
 			o5td5IPBvxzSEsA/pS9MfeKuUGUNXm8+0/CwttTMg+M=
 			</data>
 		</dict>
+		<key>www/assets/Button copy 2.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q5eZI6I+Yci5ZNVIo7wMhWEFUkk=
+			</data>
+			<key>hash2</key>
+			<data>
+			MWkhdfS/aLmMuvma8TKqjcDmL0BHO3r80U1kBvMyq0M=
+			</data>
+		</dict>
+		<key>www/assets/Button copy.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Qhj02GgJeGG5zyQqleZxYdJWpN0=
+			</data>
+			<key>hash2</key>
+			<data>
+			klgEI9vaNcBw5Fbva+GvqoTmEEpl3PqudYCtzstAnpc=
+			</data>
+		</dict>
+		<key>www/assets/Windows copy 2.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8B5ZPMImqJthvD4iMGhnDf6vpYQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			ruKgUo048/SDhTjmGKmbv+PsyQWZtjPWpIRoC+lIBtE=
+			</data>
+		</dict>
+		<key>www/assets/Windows copy 3.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9/K57QnFOwsv4aKOhzzWTku+W3w=
+			</data>
+			<key>hash2</key>
+			<data>
+			oG7cOPZjQZwW3W6QWHyZb6u6+FxQYd9NqHCIiVSGi2w=
+			</data>
+		</dict>
+		<key>www/assets/Windows copy.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			yYDjxMtaCTYC+J+3TbMRYtU8ySg=
+			</data>
+			<key>hash2</key>
+			<data>
+			D5Cnm932ctr0+Hy2DjbsFHHtldKX7MvQnnQyGcgIAxs=
+			</data>
+		</dict>
+		<key>www/assets/backgroundscene.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XAGkw/yNVNDBlZeYrwIUrpBu/t0=
+			</data>
+			<key>hash2</key>
+			<data>
+			DVghB8ooqqOr3zDleD8W5TwBJUrtFCistHYBzQsrqSI=
+			</data>
+		</dict>
 		<key>www/assets/balls.png</key>
 		<dict>
 			<key>hash</key>
@@ -940,26 +1046,70 @@
 			Jq0jn7DRFJCiBfvChSRzVGgYmetRNil5Ac24Y61krkc=
 			</data>
 		</dict>
+		<key>www/assets/ballspritesheet.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PIYOrgyox+98SFvrBgYc2x1cxQk=
+			</data>
+			<key>hash2</key>
+			<data>
+			zot+c7vsnhmLoPT3l1tasu8MXuSlI1ukJV4w6AD1nlY=
+			</data>
+		</dict>
 		<key>www/assets/dogspritesheet.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			mn/fkxc0G9WL0yv6ZfP7CGUpNHg=
+			rAaTZAOP8OhT3S7Qac5liEhhUfo=
 			</data>
 			<key>hash2</key>
 			<data>
-			8rpiF7E/A5L5NB9j55SyDuu39jc3+ZD48Wu0d8Vn0Rk=
+			ZPb8/TzsF+aLSmtAVkz+v1djOo7qanqnx+e6bISn6hE=
 			</data>
 		</dict>
-		<key>www/assets/dogstillspritesheet.png</key>
+		<key>www/assets/greenball.png</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			A7JV8O453CkC33pMOxVdtSE2ehg=
+			5DAUMOtJrhX6pu7HxxANhB8fN3I=
 			</data>
 			<key>hash2</key>
 			<data>
-			72N9O4162G/1UZilcAPNYM16AQDEWqD9koOqvDVIWYg=
+			TUp7OSglu0S4A1YyFt561LAtYT2NMx0EhlSHySAOYJM=
+			</data>
+		</dict>
+		<key>www/assets/greyball.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b8MwIW2sAvRwekS9ERwLcz3qbIA=
+			</data>
+			<key>hash2</key>
+			<data>
+			sOhJz3BAodY+a46ze+g9usWSFeQ/Zuf3CHZ+6gvbClU=
+			</data>
+		</dict>
+		<key>www/assets/redball.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Phm/aaCpbPMCZEBgLyiPjl5dN0k=
+			</data>
+			<key>hash2</key>
+			<data>
+			zL2uB7nasJwk9dJCfcNV514kh6eY4I8hvYEkAs5xLQM=
+			</data>
+		</dict>
+		<key>www/assets/yellowball.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wlB4j5DTmB3tsEjKfTI4N6kchSI=
+			</data>
+			<key>hash2</key>
+			<data>
+			CoPI7ExnDiVuA80X0YwpcAJNsyRZ4gk9G4ahRVfVbfE=
 			</data>
 		</dict>
 		<key>www/audio/heartbeat.mp3</key>
@@ -1516,11 +1666,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YenN0mQxjwhSRPL1oqZCJnp2Ajs=
+			lki3ehioFEaIuWtlX9d2F/I2hec=
 			</data>
 			<key>hash2</key>
 			<data>
-			GibP1WkTgvfMO43VyXZeJMsFR2KSa8hTV26UdEEnayU=
+			/rMiCR6jFBwZMGTZliENYx9x6vB/QReAOPxpaR5Dd7g=
 			</data>
 		</dict>
 		<key>www/src/CheckOrientation.js</key>
@@ -1538,11 +1688,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ly/I2Dp1ZvZQ4XeJ0hzyxl3a+UE=
+			wshh53kg2jvJIpnc5rSs46pLDDI=
 			</data>
 			<key>hash2</key>
 			<data>
-			eSJ0+EsRdsYDwpji45WrKY4acAJgQZbAwdYctShjyxA=
+			xx6fLeJ163KLQ0XOeibEBwhYdEW5AqOypdFH1/xPM+E=
 			</data>
 		</dict>
 		<key>www/src/GamersAssociate.js</key>
@@ -1582,11 +1732,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dQRJEEz7hnUrg5igiUax9ZRvebQ=
+			b5bnMhnaZNromxuRDk2unv1PiWo=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZuSrZ1/9T+859rutRqabSlUeQShyrHWA3qJlUbiGx34=
+			n72Fg/cQibCpz7IkkGrWOSQHU+rb5hNvdqnVzsCrLSE=
 			</data>
 		</dict>
 		<key>www/src/Scoreboard.js</key>

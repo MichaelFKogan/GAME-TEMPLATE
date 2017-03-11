@@ -65,8 +65,10 @@ BasicGame.Preloader.prototype = {
 		this.load.image('board', 'images/board.png');
 
 // GAME
-	    // this.game.load.image('atari', 'assets/atari130xe.png');
-	    this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
+		this.load.image('backgroundscene', 'assets/backgroundscene.png');
+	    // this.game.load.spritesheet('bullets', 'assets/balls.png', 17, 17);
+	    this.game.load.spritesheet('bullets', 'assets/ballspritesheet.png', 171, 174);
+
 	    this.game.load.spritesheet('dog', 'assets/dogspritesheet.png', 547, 481);
         
         this.load.image('gameover', 'images/gameover.png');
@@ -91,7 +93,8 @@ BasicGame.Preloader.prototype = {
 		//	If you don't have any music in your game then put the game.state.start line into the create function and delete
 		//	the update function completely.
 		
-		if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
+		// if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
+		if (this.cache.isSoundDecoded('menuSelect') && this.ready == false)
 		{
 			
 // START LOGO SCREEN
@@ -101,10 +104,10 @@ BasicGame.Preloader.prototype = {
 			this.state.start('Game')
 
 			// MAIN MENU AUDIO
-		this.game.music = this.add.audio('titleMusic');
+		// this.game.music = this.add.audio('titleMusic');
+		this.game.music = this.add.audio('menuSelect');
         this.game.soundMute = false;
-        
-        this.game.music.play();
+        this.game.music.play("",0,1,true, true);
         this.game.music.loop = true;
 		}
 	}

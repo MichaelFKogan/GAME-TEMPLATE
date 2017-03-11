@@ -35,8 +35,10 @@ BasicGame.Boot.prototype = {
 		this.stage.disableVisibilityChange = true;
 
 		BasicGame.orientated = true;
-		// this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+
+		this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+		this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+		// this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 
 		// this.scale.minWidth = this.game.width ;
 		// this.scale.minHeight = this.game.height ;
