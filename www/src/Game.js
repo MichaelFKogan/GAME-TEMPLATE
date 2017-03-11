@@ -23,6 +23,7 @@ BasicGame.Game = function (game) {
 
 };
 
+
 BasicGame.Game.prototype = {
 
 	create: function () {
@@ -52,20 +53,26 @@ BasicGame.Game.prototype = {
 
     // BOUNDARIES
     this.game.world.setBounds(0, 0, this.game.width, this.game.height);
-    
-    console.log("// =======================================")
-    console.log("3 ) this.game.scaleRatio: "+this.game.scaleRatio)
-    console.log("// =======================================")
 
     // BACKGROUND
-    this.background = this.game.add.tileSprite(0, 0, 1000, 750, 'backgroundscene');
+    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'backgroundscene');
     this.background.fixedToCamera = true;
-    this.background.scale.setTo(.4)
+    // this.background.scale.setTo(.4)
+
+        // BACKGROUND
+    this.ground = this.game.add.tileSprite(0, this.game.height / 1.5, this.game.width, this.game.height / 1.5, 'ground');
+    this.ground.fixedToCamera = true;
 
     // BORDER OUTLINE
     this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
     this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    this.graphics.lineStyle(2, 0xb30000, 1);
+    this.graphics.lineStyle(4, 0xb30000, 1);
+    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+
+    // BORDER/GROUND OUTLINE
+    this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height / 1.5);
+    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
+    this.graphics.lineStyle(4, 0x0000ff, 1);
     this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
 
     // ARCADE PHYSICS
@@ -78,32 +85,19 @@ BasicGame.Game.prototype = {
 // SPRITES
 
     // ADD GROUP: BALLS
-    this.balls = this.game.add.group();
-    // NUMBER OF BALLS
-    this.balls.createMultiple(100, 'bullets', 0, false);
+    // this.balls = this.game.add.group();
+    // // NUMBER OF BALLS
+    // this.balls.createMultiple(100, 'bullets', 0, false);
     // BALL GRAVITY
     this.game.physics.arcade.gravity.y = 1200;
 
 
     // DOG SPRITESHEET
-    this.player = this.game.add.sprite(this.game.world.centerX / 4, this.game.world.centerY * 1.79, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX / 12, this.game.world.centerY * 1.2, 'dog');
     this.player.anchor.set(0.5, 0.5);
+    this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
+    // this.player.scale.set(.2)
 
-    console.log("// =======================================")
-    console.log("4 ) this.player.width: "+this.player.width)
-    console.log("5 ) this.player.height: "+this.player.height)
-    console.log("6 ) this.game.width+crazy formula: "+Math.floor(((this.game.height/4)/this.player.height) * this.player.width))
-    console.log("7 ) this.game.height/4: "+this.game.height/4)
-    console.log("// =======================================")
-
-    // this.player.scale.setTo( Math.floor(((this.game.height/4)/this.player.height) * this.player.width), this.game.height/4);
-    // this.player.scale.set(0.2);
-// this.player.body.setSize(100,100)
-
-    console.log("// =======================================")
-    console.log("8 ) this.player.width after adjustment: "+this.player.width)
-    console.log("9 ) this.player.height after adjustment: "+this.player.height)
-    console.log("// =======================================")
     
     this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
     this.player.body.collideWorldBounds = true;
@@ -135,53 +129,76 @@ BasicGame.Game.prototype = {
 
     // MEDIA QUERIES LANDSCAPE
 
-    // iPad Pro
-    if(this.game.height <= 1366 && this.game.height > 1024){
-        this.player.scale.set(0.4);
-        this.balls.scale.setTo(0.4);
-    }
+    // // iPad Pro
+    // if(this.game.height <= 1366 && this.game.height > 1024){
+    //     this.player.scale.set(0.4);
+    //     this.balls.scale.setTo(0.4);
+    // }
 
-    // iPad + iPad Mini
-    else if(this.game.height <= 1024 && this.game.height > 598){
-        this.player.scale.set(0.4);
-        this.balls.scale.setTo(0.4);
-    }
+    // // iPad + iPad Mini
+    // else if(this.game.height <= 1024 && this.game.height > 598){
+    //     this.player.scale.set(0.4);
+    //     this.balls.scale.setTo(0.4);
+    // }
     
-    // iPhone 6 Plus
-    else if(this.game.height <= 598 && this.game.height > 414){
-        this.player.scale.set(0.15);
-        this.balls.scale.setTo(0.2);
-    }
+    // // iPhone 6 Plus
+    // else if(this.game.height <= 598 && this.game.height > 414){
+    //     this.player.scale.set(0.15);
+    //     this.balls.scale.setTo(0.2);
+    // }
 
-    // iPhone 6 Plus
-    else if(this.game.height <= 414 && this.game.height > 412){
-        this.player.scale.set(0.15);
-        this.balls.scale.setTo(0.2);
-    }
+    // // iPhone 6 Plus
+    // else if(this.game.height <= 414 && this.game.height > 412){
+    //     this.player.scale.set(0.15);
+    //     this.balls.scale.setTo(0.2);
+    // }
 
-    // Nexus 6P + Nexus 5X
-    else if(this.game.height <= 412 && this.game.height > 375){
-        this.player.scale.set(0.15);
-        this.balls.scale.setTo(0.2);
-    }
+    // // Nexus 6P + Nexus 5X
+    // else if(this.game.height <= 412 && this.game.height > 375){
+    //     this.player.scale.set(0.15);
+    //     this.balls.scale.setTo(0.2);
+    // }
 
-    // iPhone 6 
-    else if(this.game.height <= 375 && this.game.height > 360){
-        this.player.scale.set(0.15);
-        this.balls.scale.setTo(0.2);
-    }
+    // // iPhone 6 
+    // else if(this.game.height <= 375 && this.game.height > 360){
+    //     this.player.scale.set(0.15);
+    //     this.balls.scale.setTo(0.2);
+    // }
 
-    // Galaxy S5
-    else if(this.game.height <= 360 && this.game.height > 320){
-        this.player.scale.set(0.1);
-        this.balls.scale.setTo(0.2);
-    }
+    // // Galaxy S5
+    // else if(this.game.height <= 360 && this.game.height > 320){
+    //     this.player.scale.set(0.1);
+    //     this.balls.scale.setTo(0.2);
+    // }
 
-    // iPhone 5 
-    else if(this.game.height <= 320){
-        this.player.scale.set(0.15);
-        this.balls.scale.setTo(0.2);
-    }
+    // // iPhone 5 
+    // else if(this.game.height <= 320){
+    //     this.player.scale.set(0.15);
+    //     this.balls.scale.setTo(0.2);
+    // }
+
+    console.log(" ")
+    console.log("WINDOW.INNERWIDTH: "+window.innerWidth)
+    console.log("WINDOW.INNERHEIGHT: "+window.innerHeight)
+    console.log(" ")
+    console.log("WINDOW.DEVICEPIXELRATIO: "+window.devicePixelRatio)
+    console.log(" ")
+    console.log("THIS.GAME.SCALERATIO: "+this.game.scaleRatio)
+    console.log(" ")
+    console.log("THIS.GAME.WIDTH: "+this.game.width)
+    console.log("THIS.GAME.HEIGHT: "+this.game.height)
+    // console.log(" ")    
+    // console.log("this.game.world: "+this.game.world)
+    // console.log("this.game.world: "+this.game.world)
+    console.log(" ")
+    console.log("this.game.world.centerX: "+this.game.world.centerX)
+    console.log("this.game.world.centerY: "+this.game.world.centerY)
+    console.log(" ")
+    console.log("this.scale.minWidth: "+this.scale.minWidth)
+    console.log("this.scale.minHeight: "+this.scale.minHeight)
+    console.log(" ")
+    console.log("this.scale.maxWidth: "+this.scale.maxWidth)
+    console.log("this.scale.maxHeight: "+this.scale.maxHeight)
 
 
 // END SPRITES
@@ -215,7 +232,7 @@ BasicGame.Game.prototype = {
 // ====================================================
     fire: function() {
 
-        this.ball = this.balls.getFirstExists(false);
+        // this.ball = this.balls.getFirstExists(false);
 
         if (this.ball){
             this.ball.frame = this.game.rnd.integerInRange(0,6);
@@ -262,33 +279,52 @@ reflect: function(a, ball) {
     this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
     this.player.body.velocity.x = 0;
 
+
+// DOG AUTOMATICALLY RUNNING LEFT AND RIGHT. NEVER STOPS
         if(this.START == false){
         this.player.animations.play('dogidleright');
         }
             if (this.cursors.right.isDown || this.game.input.pointer1.isDown){   
             // if (this.game.input.pointer1.isDown){   
                     this.START = true;
-                    this.player.body.velocity.x = 450;
+                    // this.player.body.velocity.x = 650;
                     this.player.animations.play('dogrunright');
                 }
 
-            else if(this.START == true){
-                    this.player.body.velocity.x = -450;
-                    this.player.animations.play('dogrunleft');
-                }
+            else{ this.player.animations.play('dogidleright');}
+
+            // else if(this.START == true){
+            //         // this.player.body.velocity.x = -650;
+            //         this.player.animations.play('dogrunleft');
+            //     }
+
+                // if (this.cursors.right.isDown){
+                //     this.player.body.velocity.x = 1650;
+                //     this.player.animations.play('dogrunright');
+                // }
+
+                // else if (this.cursors.left.isDown){
+                //     this.player.body.velocity.x = -1650;
+                //     this.player.animations.play('dogrunleft');
+                // }
+
+                // else{this.player.animations.play('dogidleright');}
 
     // this.balls.forEachAlive(this.checkBounds, this);
 
 
 // BACKGROUND IMAGE MOVE WITH CAMERA
-    if (!this.game.camera.atLimit.x)
-    {this.background.tilePosition.x -= ((this.player.body.velocity.x/24) * this.game.time.physicsElapsed);}
-
     //  Scroll the background
-    this.background.tilePosition.x -= .1;
+    if (this.cursors.right.isDown || this.game.input.pointer1.isDown){
+        this.background.tilePosition.x -= 4;
+        this.ground.tilePosition.x -= 8;
 
-    // if (!this.game.camera.atLimit.y)
-    // {this.background.tilePosition.y -= ((this.player.body.velocity.y/16) * this.game.time.physicsElapsed);}
+    }
+
+    // else{ this.background.tilePosition.x -= .4;}
+
+
+
 
 	}, // END UPDATE
 // ====================================================
@@ -319,8 +355,8 @@ render: function() {
     // this.game.context.fillRect(this.zone.x, this.zone.y, this.zone.width, this.zone.height);
 
 // DEBUG PLAYER
-this.game.debug.body(this.player);
-this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), '#FFFF00');
+// this.game.debug.body(this.player);
+// this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), '#FFFF00');
 
 // this.game.debug.body(this.balls);
 // this.game.debug.geom(new Phaser.Point(this.balls.x, this.balls.y), '#FFFF00');

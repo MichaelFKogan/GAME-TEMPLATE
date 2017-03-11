@@ -31,10 +31,7 @@ BasicGame.Boot.prototype = {
 
 		this.game.scaleRatio = window.devicePixelRatio / 3;
 
-    	console.log("// =======================================")
-		console.log("1 ) this.game.width: "+this.game.width)
-		console.log("2 ) this.game.height: "+this.game.height)
-    	console.log("// =======================================")
+		// this.game.width = 
 
 		this.input.maxPointers = 2;
 		this.stage.disableVisibilityChange = true;
@@ -47,8 +44,8 @@ BasicGame.Boot.prototype = {
 		// this.scale.scaleMode = Phaser.ScaleManager.NO_SCALE;
 		// this.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
 
-		// this.scale.minWidth = this.game.width;
-		// this.scale.minHeight = this.game.height;
+		this.scale.minWidth = this.game.width/window.devicePixelRatio;
+		this.scale.minHeight = this.game.height/window.devicePixelRatio;
 
 		// this.scale.maxWidth = this.game.width;
 		// this.scale.maxHeight = this.game.height;
@@ -59,7 +56,7 @@ BasicGame.Boot.prototype = {
 		this.game.scale.refresh();
 
 		        //Pixel Art
-		this.game.renderer.renderSession.roundPixels = true;
+		this.game.renderer.renderSession.roundPixels = false;
         this.game.time.desiredFps = 60;
 
 		// if (this.game.device.desktop){
