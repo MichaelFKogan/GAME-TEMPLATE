@@ -77,7 +77,7 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.checkCollision.up = false;
 
     // BACKGROUND
-    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height/2, 'backgroundscene');
+    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height/1.251, 'backgroundscene');
     this.background.autoScroll(-20, 0)
     // this.background.fixedToCamera = true;
     // this.background.scale.setTo(.4)
@@ -129,7 +129,7 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.enable(this.ground);
     this.ground.body.immovable = true;
     this.ground.body.moves = false;
-    this.ground.autoScroll(-400, 0);
+    this.ground.autoScroll(-300, 0);
 
 
 
@@ -143,7 +143,7 @@ BasicGame.Game.prototype = {
 
     // DOG SPRITESHEET
     // this.player = this.game.add.sprite(this.game.world.centerX / 12, this.game.world.centerY * 1.2, 'dog');
-    this.player = this.game.add.sprite(this.game.world.centerX / 4, this.game.height/1.7, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX / 4, this.game.height/1.45, 'dog');
     this.player.anchor.set(0.5, 0.5);
     this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
 
@@ -159,6 +159,7 @@ BasicGame.Game.prototype = {
     this.player.animations.play('dogidleright');
 
     this.player.checkWorldBounds = true;
+    this.player.body.gravity.y = 6000;  
 
     // this.player.body.collideWorldBounds = true;
     // this.player.body.allowGravity = true;
@@ -340,8 +341,7 @@ BasicGame.Game.prototype = {
                 this.game.physics.arcade.enable(this.player);
                 
                 // this.bird.body.setSize(this.bird.width - 10, this.bird.height - 10, 0, 0);
-                this.player.body.gravity.y = 2000; 
-                this.player.body.gravity.y = 0;       
+                // this.player.body.gravity.y = 6000;     
                 this.player.body.collideWorldBounds = true;
                 
                 this.newtubes.timer.start();
@@ -421,10 +421,10 @@ BasicGame.Game.prototype = {
 
                 if(this.game.input.pointer1.isDown){
                     this.start();
-                    this.player.body.velocity.y = -750;
+                    this.player.body.velocity.y = -1250;
                 }
 
-                else if(this.started){ this.player.body.velocity.y = +450;}
+                // else if(this.started){ this.player.body.velocity.y = +450;}
 
 
                 // this.player.body.gravity.y = 6500;        
