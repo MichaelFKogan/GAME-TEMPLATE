@@ -32,102 +32,156 @@ BasicGame.Game.prototype = {
 // ORIGINAL CODE
 //         var self = this;
 // // SCORE
-// 		this.score = 42;
+//      this.score = 42;
 // // BACKGROUND
-// 		this.add.sprite(0, 0, 'background');
+//      this.add.sprite(0, 0, 'background');
 //         var headY = 25 + 60 / 2;
 // // PAUSE BUTTON
 //         this.pauseButton = this.add.button(25 + (60 / 2), headY, 'pause', function() { self.pause(); });
 //         this.pauseButton.anchor.setTo(0.5, 0.5);
 // // SCOREBOARD
-// 		this.scoreboard = new Scoreboard(this.game);
-// 		this.add.existing(this.scoreboard);
+//      this.scoreboard = new Scoreboard(this.game);
+//      this.add.existing(this.scoreboard);
 // // PAUSEBOARD
 //         this.pauseboard = new Pauseboard(this.game);
 //         this.add.existing(this.pauseboard);
 // ORIGINAL CODE
 // ====================================================
 
+
+// ====================================================
+//  VARIABLES
+
+            this.totalScore = 0;
+            this.started = false;
+            this.dead = false;
+            this.canJump = true;
+            this.canRestart = false;
+            this.firstPress = false;
+
+    // ADD PHYSICS TO EVERYTHING IN WORLD
+    //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
+    this.game.physics.arcade.enable(this.game.world, true);
+
+// VARIABLES
+// ====================================================
+
+
 // ====================================================
 //  WORLD 
 
     // BOUNDARIES
     this.game.world.setBounds(0, 0, this.game.width, this.game.height);
+    // ARCADE PHYSICS
+    this.game.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.physics.arcade.checkCollision.up = false;
 
     // BACKGROUND
     this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'backgroundscene');
     this.background.fixedToCamera = true;
     // this.background.scale.setTo(.4)
 
-        // BACKGROUND
-    this.ground = this.game.add.tileSprite(0, this.game.height / 1.5, this.game.width, this.game.height / 1.5, 'ground');
-    this.ground.fixedToCamera = true;
-
     // BORDER OUTLINE
-    this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
-    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    this.graphics.lineStyle(4, 0xb30000, 1);
-    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+    // this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height);
+    // this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
+    // this.graphics.lineStyle(4, 0xb30000, 1);
+    // this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
 
-    // BORDER/GROUND OUTLINE
-    this.bounds = new Phaser.Rectangle(0, 0, this.game.width, this.game.height / 1.5);
-    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    this.graphics.lineStyle(4, 0x0000ff, 1);
-    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
-
-    // ARCADE PHYSICS
-    this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-// END WORLD SETTINGS
+// WORLD 
 // ====================================================
 
-// ====================================================
-// SPRITES
 
-    // ADD GROUP: BALLS
+// ====================================================
+// GROUPS
+
+    // BALLS
     // this.balls = this.game.add.group();
     // // NUMBER OF BALLS
     // this.balls.createMultiple(100, 'bullets', 0, false);
     // BALL GRAVITY
-    this.game.physics.arcade.gravity.y = 1200;
+    // this.game.physics.arcade.gravity.y = 1200;
 
+    // LOOP GAME TIME EVENT
+    this.game.time.events.loop(150, this.fire, this);
+
+
+    this.tubes = this.game.add.group();
+    this.tubes.enableBody = true;
+    this.tubes.createMultiple(12, 'greytube');
+    this.newtubes = this.game.time.events.loop(1500, this.newTube, this);
+    this.newtubes.timer.stop(false);
+
+
+    this.sensors = this.game.add.group();
+    this.sensors.enableBody = true;
+
+
+    // GROUND
+    // this.ground = this.game.add.tileSprite(0, this.game.height / 1.5, this.game.width, this.game.height / 1.5, 'ground');
+    var groundCache = this.game.cache.getFrame('ground');
+    console.log("GROUNDCACHE"+groundCache)
+    console.log("GROUNDCACHE HEIGHT: "+groundCache.height)
+
+    // this.ground = this.game.add.tileSprite(0, this.game.height/1.5, this.game.width, groundCache.height, 'ground');
+    this.ground = this.game.add.tileSprite(0, this.game.height, this.game.width, groundCache.height, 'ground');
+    this.ground.anchor.y = 1;
+    this.game.physics.arcade.enable(this.ground);
+    this.ground.body.immovable = true;
+    this.ground.body.moves = false;
+    this.ground.autoScroll(-200, 0);
+
+
+
+// GROUPS
+// ====================================================
+
+
+
+// ====================================================
+// SPRITES
 
     // DOG SPRITESHEET
-    this.player = this.game.add.sprite(this.game.world.centerX / 12, this.game.world.centerY * 1.2, 'dog');
+    // this.player = this.game.add.sprite(this.game.world.centerX / 12, this.game.world.centerY * 1.2, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX / 6, 0, 'dog');
     this.player.anchor.set(0.5, 0.5);
-    this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
-    // this.player.scale.set(.2)
+    this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
 
-    
     this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
-    this.player.body.collideWorldBounds = true;
+    this.game.physics.arcade.enable(this.player);
 
-    // SET PHYSICS TO PLAYER
-    // this.game.physics.arcade.enable(this.player);
-
-    // PLAYER BOUNCE
-    // this.player.body.bounce.y = 0.2;
-    // this.player.body.gravity.y = 300;
-    // this.player.body.collideWorldBounds = true;
 
     // DOG SPRITESHEET ANIMATIONS
     //  Our two animations, walking left and right.
     this.player.animations.add('dogidleright', [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 16, true);
-    this.player.animations.add('dogrunright', [18, 19, 20, 21, 22, 23, 24, 25], 16, true);
+    this.player.animations.add('dogrunright', [18, 19, 20, 21, 22, 23, 24, 25], 14, true);
     this.player.animations.add('dogrunleft', [10, 11, 12, 13, 14, 15, 16, 17], 16, true);
+    this.player.animations.play('dogidleright');
 
-    // ADD PHYSICS TO EVERYTHING IN WORLD
-    //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
-    this.game.physics.arcade.enable(this.game.world, true);
+    this.player.checkWorldBounds = true;
 
-    // SPRITE GRAVITY
-    this.player.body.allowGravity = 0;
+    // this.player.body.collideWorldBounds = true;
+    // this.player.body.allowGravity = true;
+    // this.player.body.immovable = true;
+    // this.player.body.enable = true;
 
-    // SPRITE IMMOVABLE
-    this.player.body.immovable = true;
+    this.game.input.onDown.add(this.jump, this);
+
+    this.scoreText = this.game.add.text(this.game.world.centerX * 1.95, this.game.world.centerY/8, "0", { font: "60px Arial", fill: "#666" }); 
+    this.scoreText.anchor.set(0.5);
+
+    this.hitAudio = this.add.audio('hit');
+    this.dieAudio = this.add.audio('die');
+    this.pointAudio = this.add.audio('point');
+    this.wingAudio = this.add.audio('wing');
 
 
-    // MEDIA QUERIES LANDSCAPE
+// SPRITES
+// ====================================================
+
+
+
+// ====================================================
+// MEDIA QUERIES LANDSCAPE
 
     // // iPad Pro
     // if(this.game.height <= 1366 && this.game.height > 1024){
@@ -177,6 +231,13 @@ BasicGame.Game.prototype = {
     //     this.balls.scale.setTo(0.2);
     // }
 
+// MEDIA QUERIES LANDSCAPE
+// ====================================================
+
+
+// ====================================================
+// CONSOLE.LOG
+
     console.log(" ")
     console.log("WINDOW.INNERWIDTH: "+window.innerWidth)
     console.log("WINDOW.INNERHEIGHT: "+window.innerHeight)
@@ -200,36 +261,32 @@ BasicGame.Game.prototype = {
     console.log("this.scale.maxWidth: "+this.scale.maxWidth)
     console.log("this.scale.maxHeight: "+this.scale.maxHeight)
 
-
-// END SPRITES
+// CONSOLE.LOG
 // ====================================================
+
 
 // ====================================================
 // KEYBOARD
     // ADD KEYBOARD
     this.cursors = this.game.input.keyboard.createCursorKeys();
+// KEYBOARD
 // ====================================================
 
-    // LOOP GAME TIME EVENT
-    this.game.time.events.loop(150, this.fire, this);
 
 // ====================================================
 // CAMERA
     // this.game.camera.follow(this.player); 
     // this.game.camera.deadzone = new Phaser.Rectangle(0, (this.game.height/2) + (this.game.height/4), (this.game.width/2) + (this.game.width/8), this.game.height/4);
+// CAMERA
 // ====================================================
 
-// ====================================================
-// SENSORS
-                this.sensors = this.game.add.group();
-                this.sensors.enableBody = true;
-// ====================================================
 
     this.START = false;
 },
 // ====================================================
 
-// ====================================================
+
+
     fire: function() {
 
         // this.ball = this.balls.getFirstExists(false);
@@ -241,22 +298,21 @@ BasicGame.Game.prototype = {
             this.ball.body.bounce.y = 0.8;
         }
     },
-// ====================================================
 
-// ====================================================
-reflect: function(a, ball) {
 
-    // if (this.ball.y > (this.atari.y + 5)){
-    //     return true;
-    // }
-    // else{
-        // this.ball.body.velocity.x = this.atari.body.velocity.x;
-        // this.ball.body.velocity.y *= -(this.ball.body.bounce.y);
+    reflect: function(a, ball) {
 
-        // return false;
-    // }
-},
-// ====================================================
+        // if (this.ball.y > (this.atari.y + 5)){
+        //     return true;
+        // }
+        // else{
+            // this.ball.body.velocity.x = this.atari.body.velocity.x;
+            // this.ball.body.velocity.y *= -(this.ball.body.bounce.y);
+
+            // return false;
+        // }
+    },
+
 
 // ====================================================
 // ORIGINAL CODE
@@ -272,62 +328,111 @@ reflect: function(a, ball) {
 // ORIGINAL CODE
 // ====================================================
 
-// ====================================================
-	update: function () {
 
-// RUNNING ON TAP
-    this.game.physics.arcade.collide(this.player, this.balls, null, this.reflect);
-    this.player.body.velocity.x = 0;
+            start: function(){
+
+                this.background.autoScroll(-50, 0)
+                this.ground.autoScroll(-400, 0);
+                // this.player.animations.play('dogrunright');
+
+                this.game.physics.arcade.enable(this.player);
+                
+                // this.bird.body.setSize(this.bird.width - 10, this.bird.height - 10, 0, 0);
+                this.player.body.gravity.y = 9000;        
+                this.player.body.collideWorldBounds = true;
+                
+                this.newtubes.timer.start();
+                
+                this.started = true;
+
+            },
+            gameOver: function(){
+                var self = this;
+                this.newtubes.timer.stop(false);
+                
+                this.game.add.tween(this.game.camera).to({ x: -10 }, 40, Phaser.Easing.Sinusoidal.InOut, true, 0, 5, true);
+                this.bird.animations.stop();
+                
+                this.flash = this.game.add.graphics(-10, 0);
+                this.flash.beginFill(0xffffff, 1);
+                this.flash.drawRect(0, 0, this.game.width + 20, this.game.height);
+                this.flash.endFill();
+                this.flash.alpha = 0.5;
+                this.game.add.tween(this.flash).to({ alpha: 0 }, 50, Phaser.Easing.Cubic.In, true);
+                
+                this.dead = true;
+                
+                var self = this;
+                setTimeout(function(){
+                    self.canRestart = true;
+                }, Phaser.Timer.SECOND * 0.5);
+                
+                this.tubes.forEachAlive(function(tube){
+                    tube.body.velocity.x = 0;
+                }, this);
+                this.sensors.forEachAlive(function(sensor){
+                    sensor.body.velocity.x = 0;
+                }, this);
+                
+                try {
+                    $cordovaVibration.vibrate(300);
+                } catch (error) {
+                    console.log(error);
+                }
+                
+                this.hitAudio.play();
+                $timeout(function () {
+                    self.dieAudio.play();
+                }, 300);
+            },
+            jump: function(){
+                if(!this.dead) {
+                    this.start();
+                }
+                
+                // if(!this.dead && this.canJump && this.firstPress && this.player.body.touching.down) {
+                //     // this.player.animations.play('jump');
+                //     this.player.body.velocity.y = -2000;
+                //     this.playerInJump = true;
+                //     // this.wingAudio.play();
+                // }
+
+                // else if(!this.dead && this.canJump && this.firstPress && !this.player.body.touching.down){
+                //     this.player.body.velocity.y = -2000;
+                //     this.playerInJump = true;
+                // }
+                
+                // if(this.dead && this.canRestart) {
+                //     this.game.state.start(this.game.state.current);
+                // }
+                    this.firstPress = true;
+
+            },
 
 
-// DOG AUTOMATICALLY RUNNING LEFT AND RIGHT. NEVER STOPS
-        if(this.START == false){
-        this.player.animations.play('dogidleright');
-        }
-            if (this.cursors.right.isDown || this.game.input.pointer1.isDown){   
-            // if (this.game.input.pointer1.isDown){   
-                    this.START = true;
-                    // this.player.body.velocity.x = 650;
+        	update: function () {
+
+                // RUNNING ON TAP
+                this.game.physics.arcade.collide(this.player, this.ground, this.balls, null, this.reflect);
+                this.player.body.velocity.x = 0;
+
+                if(this.cursors.right.isDown || this.game.input.pointer1.isDown && !this.dead && this.canJump && this.firstPress) {
                     this.player.animations.play('dogrunright');
+                    this.player.body.velocity.x = 450;
+                    // this.wingAudio.play();
                 }
 
-            else{ this.player.animations.play('dogidleright');}
-
-            // else if(this.START == true){
-            //         // this.player.body.velocity.x = -650;
-            //         this.player.animations.play('dogrunleft');
-            //     }
-
-                // if (this.cursors.right.isDown){
-                //     this.player.body.velocity.x = 1650;
-                //     this.player.animations.play('dogrunright');
-                // }
-
-                // else if (this.cursors.left.isDown){
-                //     this.player.body.velocity.x = -1650;
-                //     this.player.animations.play('dogrunleft');
-                // }
-
-                // else{this.player.animations.play('dogidleright');}
-
-    // this.balls.forEachAlive(this.checkBounds, this);
+                else{
+                    this.player.body.velocity.x = -350;
+                    this.ground.autoScroll(-300, 0);
+                }
+                    this.firstPress = true;
 
 
-// BACKGROUND IMAGE MOVE WITH CAMERA
-    //  Scroll the background
-    if (this.cursors.right.isDown || this.game.input.pointer1.isDown){
-        this.background.tilePosition.x -= 4;
-        this.ground.tilePosition.x -= 8;
+                // this.balls.forEachAlive(this.checkBounds, this);
 
-    }
+        	}, // END UPDATE
 
-    // else{ this.background.tilePosition.x -= .4;}
-
-
-
-
-	}, // END UPDATE
-// ====================================================
 
 // ====================================================
 // checkBounds: function (ball) {
@@ -348,19 +453,127 @@ reflect: function(a, ball) {
 	},
 // ====================================================
 
-render: function() {
-// DEADZONE - Rectangle that defines the limits at which the camera will scroll
-    // this.zone = this.game.camera.deadzone;
-    // this.game.context.fillStyle = 'rgba(255,0,0,0.6)';
-    // this.game.context.fillRect(this.zone.x, this.zone.y, this.zone.width, this.zone.height);
+            // updateAngle: function(){
+                
+            //     if(this.bird.body.touching.down) return;
+                
+            //     if(this.birdInJump){
+            //         if(this.bird.angle > -30){
+            //             this.bird.angle -= 10;
+            //         }else{
+            //             this.birdInJump = false;
+            //         }
+            //     }else if(this.bird.angle < 0){
+            //         this.bird.angle += 1;
+            //     }else if(this.bird.angle < 45){
+            //         this.bird.animations.stop();
+            //         this.bird.angle += 2;
+            //     }else if(this.bird.angle < 90){
+            //         this.bird.angle += 4;
+            //     }
+            // },
 
-// DEBUG PLAYER
-// this.game.debug.body(this.player);
-// this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), '#FFFF00');
+            // resize: function(){
+                
+            //     if(this.bird){
+            //         this.bird.x = this.game.world.centerX/2;
+            //     }
+            //     if(this.scoreText){
+            //         this.scoreText.y = this.game.world.centerY/3;
+            //         this.scoreText.x = this.game.world.centerX;
+            //     }
+            //     if (this.ground) {
+            //         this.ground.width = this.game.width + 20;
+            //     }
+            // },
 
-// this.game.debug.body(this.balls);
-// this.game.debug.geom(new Phaser.Point(this.balls.x, this.balls.y), '#FFFF00');
-}
+            render: function() {
+            // DEADZONE - Rectangle that defines the limits at which the camera will scroll
+                // this.zone = this.game.camera.deadzone;
+                // this.game.context.fillStyle = 'rgba(255,0,0,0.6)';
+                // this.game.context.fillRect(this.zone.x, this.zone.y, this.zone.width, this.zone.height);
+
+            // DEBUG PLAYER
+            this.game.debug.text('Debugging', 10, 30, 'white', '20px "Sigmar One"');
+
+            this.game.debug.body(this.player);
+            this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), 'blue');
+
+            this.game.debug.body(this.ground, 'rgba(255, 255, 0, 0.5)');
+
+            // this.sensors && this.sensors.forEachAlive(function(sensor){
+            //     this.game.debug.body(sensor, 'rgba(0, 255, 0, 0.5)');
+            // }, this);
+
+            // this.game.debug.body(this.balls);
+            // this.game.debug.geom(new Phaser.Point(this.balls.x, this.balls.y), 'blue');
+
+            // this.tubes && this.tubes.forEachAlive(function(tube){
+            //     this.game.debug.body(tube, 'rgba(0, 0, 255, 0.5)');
+            // }, this); 
+
+            },
+
+            newTube: function(){
+                var randomPosition = this.game.rnd.integerInRange(120, this.game.height - this.ground.height - 100);
+                
+                var tube = this.game.cache.getFrame('greytube');
+                
+                var tube1 = this.tubes.getFirstDead();
+                tube1.reset(this.game.width + tube.width/2, randomPosition - 100);
+
+                tube1.anchor.setTo(0.5, 1);
+                tube1.scale.set(1.4);
+                tube1.body.velocity.x = -480;
+
+                tube1.body.immovable = true;
+                tube1.checkWorldBounds = true;
+                tube1.outOfBoundsKill = true;
+                
+                var tube2 = this.tubes.getFirstDead();
+                tube2.reset(this.game.width + tube.width/2, randomPosition + 100 + tube.height/2);
+
+                tube2.anchor.setTo(0.5, 0.5);
+                tube2.scale.setTo(-1.4, -1.4);
+                tube2.body.velocity.x = -480;
+
+                tube2.body.immovable = true;
+                tube2.checkWorldBounds = true;
+                tube2.outOfBoundsKill = true;
+                
+                var sensor = this.sensors.create(this.game.width + tube.width, 0);
+                sensor.body.setSize(40, this.game.height);
+                sensor.body.velocity.x = -180;
+                sensor.body.immovable = true;
+                sensor.alpha = 0;
+            },
+
+            //  incrementScore: function(bird, sensor){
+            //     sensor.kill();
+            //     this.totalScore++;
+            //     this.scoreText.setText(this.totalScore);
+            //     this.pointAudio.play();
+            // },
+
+
+
 
 }; // END BasicGame.Game.prototype
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
