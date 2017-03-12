@@ -77,8 +77,9 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.checkCollision.up = false;
 
     // BACKGROUND
-    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'backgroundscene');
-    this.background.fixedToCamera = true;
+    this.background = this.game.add.tileSprite(0, 0, this.game.width, this.game.height/2, 'backgroundscene');
+    this.background.autoScroll(-20, 0)
+    // this.background.fixedToCamera = true;
     // this.background.scale.setTo(.4)
 
     // BORDER OUTLINE
@@ -107,7 +108,7 @@ BasicGame.Game.prototype = {
 
     this.tubes = this.game.add.group();
     this.tubes.enableBody = true;
-    this.tubes.createMultiple(12, 'greytube');
+    this.tubes.createMultiple(12, 'spikes2');
     this.newtubes = this.game.time.events.loop(1500, this.newTube, this);
     this.newtubes.timer.stop(false);
 
@@ -128,7 +129,7 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.enable(this.ground);
     this.ground.body.immovable = true;
     this.ground.body.moves = false;
-    this.ground.autoScroll(-200, 0);
+    this.ground.autoScroll(-400, 0);
 
 
 
@@ -142,7 +143,7 @@ BasicGame.Game.prototype = {
 
     // DOG SPRITESHEET
     // this.player = this.game.add.sprite(this.game.world.centerX / 12, this.game.world.centerY * 1.2, 'dog');
-    this.player = this.game.add.sprite(this.game.world.centerX / 6, 0, 'dog');
+    this.player = this.game.add.sprite(this.game.world.centerX / 4, this.game.height/1.7, 'dog');
     this.player.anchor.set(0.5, 0.5);
     this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
 
@@ -164,7 +165,7 @@ BasicGame.Game.prototype = {
     // this.player.body.immovable = true;
     // this.player.body.enable = true;
 
-    this.game.input.onDown.add(this.jump, this);
+    // this.game.input.onTap.add(this.jump, this);
 
     this.scoreText = this.game.add.text(this.game.world.centerX * 1.95, this.game.world.centerY/8, "0", { font: "60px Arial", fill: "#666" }); 
     this.scoreText.anchor.set(0.5);
@@ -282,7 +283,8 @@ BasicGame.Game.prototype = {
 
 
     this.START = false;
-},
+
+}, // END CREATE
 // ====================================================
 
 
@@ -331,14 +333,15 @@ BasicGame.Game.prototype = {
 
             start: function(){
 
-                this.background.autoScroll(-50, 0)
-                this.ground.autoScroll(-400, 0);
-                // this.player.animations.play('dogrunright');
+                // this.ground.autoScroll(-250, 0);
+
+                this.player.animations.play('dogrunright');
 
                 this.game.physics.arcade.enable(this.player);
                 
                 // this.bird.body.setSize(this.bird.width - 10, this.bird.height - 10, 0, 0);
-                this.player.body.gravity.y = 9000;        
+                this.player.body.gravity.y = 2000; 
+                this.player.body.gravity.y = 0;       
                 this.player.body.collideWorldBounds = true;
                 
                 this.newtubes.timer.start();
@@ -389,44 +392,54 @@ BasicGame.Game.prototype = {
                 if(!this.dead) {
                     this.start();
                 }
-                
-                // if(!this.dead && this.canJump && this.firstPress && this.player.body.touching.down) {
-                //     // this.player.animations.play('jump');
-                //     this.player.body.velocity.y = -2000;
-                //     this.playerInJump = true;
-                //     // this.wingAudio.play();
-                // }
 
-                // else if(!this.dead && this.canJump && this.firstPress && !this.player.body.touching.down){
-                //     this.player.body.velocity.y = -2000;
-                //     this.playerInJump = true;
-                // }
+                console.log("Jump")
                 
-                // if(this.dead && this.canRestart) {
-                //     this.game.state.start(this.game.state.current);
-                // }
+                if(!this.dead && this.canJump && this.firstPress && this.player.body.touching.down) {
+                    // this.player.animations.play('jump');
+                    this.player.body.velocity.y = -2000;
+                    this.playerInJump = true;
+                    // this.wingAudio.play();
+                }
+
+                else if(this.input.pointer1.isDown &&!this.dead && this.canJump && this.firstPress && !this.player.body.touching.down){
+                    this.player.body.velocity.y = -1750;
+                    this.playerInJump = true;
+                }
+                
+                if(this.dead && this.canRestart) {
+                    this.game.state.start(this.game.state.current);
+                }
                     this.firstPress = true;
 
             },
 
 
         	update: function () {
-
-                // RUNNING ON TAP
+                this.ground.tilePosition.x +=250
                 this.game.physics.arcade.collide(this.player, this.ground, this.balls, null, this.reflect);
-                this.player.body.velocity.x = 0;
 
-                if(this.cursors.right.isDown || this.game.input.pointer1.isDown && !this.dead && this.canJump && this.firstPress) {
-                    this.player.animations.play('dogrunright');
-                    this.player.body.velocity.x = 450;
-                    // this.wingAudio.play();
+                if(this.game.input.pointer1.isDown){
+                    this.start();
+                    this.player.body.velocity.y = -750;
                 }
 
-                else{
-                    this.player.body.velocity.x = -350;
-                    this.ground.autoScroll(-300, 0);
-                }
-                    this.firstPress = true;
+                else if(this.started){ this.player.body.velocity.y = +450;}
+
+
+                // this.player.body.gravity.y = 6500;        
+
+                // if(this.game.input.pointer1.isDown && this.player.body.touching.down){
+                //     console.log("OnTap")
+                // this.player.body.velocity.y = -2000;
+                // }
+
+                // else if(this.game.input.pointer1.isDown && !this.player.body.touching.down){
+                // this.player.body.velocity.y = -2000;
+                // this.player.body.gravity = 0;
+                // }
+                //     this.start();
+
 
 
                 // this.balls.forEachAlive(this.checkBounds, this);
@@ -494,12 +507,12 @@ BasicGame.Game.prototype = {
                 // this.game.context.fillRect(this.zone.x, this.zone.y, this.zone.width, this.zone.height);
 
             // DEBUG PLAYER
-            this.game.debug.text('Debugging', 10, 30, 'white', '20px "Sigmar One"');
+            // this.game.debug.text('Debugging', 10, 30, 'white', '20px "Sigmar One"');
 
-            this.game.debug.body(this.player);
-            this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), 'blue');
+            // this.game.debug.body(this.player);
+            // this.game.debug.geom(new Phaser.Point(this.player.x, this.player.y), 'blue');
 
-            this.game.debug.body(this.ground, 'rgba(255, 255, 0, 0.5)');
+            // this.game.debug.body(this.ground, 'rgba(255, 255, 0, 0.5)');
 
             // this.sensors && this.sensors.forEachAlive(function(sensor){
             //     this.game.debug.body(sensor, 'rgba(0, 255, 0, 0.5)');
@@ -517,35 +530,40 @@ BasicGame.Game.prototype = {
             newTube: function(){
                 var randomPosition = this.game.rnd.integerInRange(120, this.game.height - this.ground.height - 100);
                 
-                var tube = this.game.cache.getFrame('greytube');
+                var tube = this.game.cache.getFrame('spikes2');
                 
-                var tube1 = this.tubes.getFirstDead();
-                tube1.reset(this.game.width + tube.width/2, randomPosition - 100);
+                // var tube1 = this.tubes.getFirstDead();
+                // tube1.reset(this.game.width + tube.width/2, randomPosition - 100);
 
-                tube1.anchor.setTo(0.5, 1);
-                tube1.scale.set(1.4);
-                tube1.body.velocity.x = -480;
+                // tube1.anchor.setTo(0.5, 1);
+                // // tube1.scale.set(1);
+                // tube1.scale.setTo(-1, -1);
+                // tube1.body.velocity.x = -380;
 
-                tube1.body.immovable = true;
-                tube1.checkWorldBounds = true;
-                tube1.outOfBoundsKill = true;
+                // tube1.body.immovable = true;
+                // tube1.checkWorldBounds = true;
+                // tube1.outOfBoundsKill = true;
+
                 
-                var tube2 = this.tubes.getFirstDead();
-                tube2.reset(this.game.width + tube.width/2, randomPosition + 100 + tube.height/2);
+                // var tube2 = this.tubes.getFirstDead();
+                // // tube2.reset(this.game.width + tube.width/2, randomPosition + 100 + tube.height/2);
+                // tube2.reset(this.game.width + tube.width/2, this.game.height / 1.48);
 
-                tube2.anchor.setTo(0.5, 0.5);
-                tube2.scale.setTo(-1.4, -1.4);
-                tube2.body.velocity.x = -480;
+                // tube2.anchor.setTo(.1, .1);
+                // tube2.scale.set(1);
+                // // tube2.scale.setTo(-1, -1);
+                // tube2.body.velocity.x = -350;
 
-                tube2.body.immovable = true;
-                tube2.checkWorldBounds = true;
-                tube2.outOfBoundsKill = true;
+                // tube2.body.immovable = true;
+                // tube2.checkWorldBounds = true;
+                // tube2.outOfBoundsKill = true;
+
                 
-                var sensor = this.sensors.create(this.game.width + tube.width, 0);
-                sensor.body.setSize(40, this.game.height);
-                sensor.body.velocity.x = -180;
-                sensor.body.immovable = true;
-                sensor.alpha = 0;
+                // var sensor = this.sensors.create(this.game.width + tube.width, 0);
+                // sensor.body.setSize(40, this.game.height);
+                // sensor.body.velocity.x = -180;
+                // sensor.body.immovable = true;
+                // sensor.alpha = 0;
             },
 
             //  incrementScore: function(bird, sensor){
