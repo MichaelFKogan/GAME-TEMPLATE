@@ -66,18 +66,16 @@ BasicGame.Game.prototype = {
 
 
     // this.game.world.setBounds(0, 0, this.game.screenWidth, this.game.screenHeight);
-    this.game.world.setBounds(0, 0, this.game.width * 4, this.game.height * 2);
+    this.game.world.setBounds(0, 0, this.game.width, this.game.height * 2);
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    // this.game.physics.arcade.checkCollision.up = false;
+    // this.game.physics.arcade.checkCollision.down = false;
 
     // BACKGROUND
     this.background = this.game.add.tileSprite(0, 0, this.game.world.width * 4, this.game.world.height , 'backgroundscene');
     this.background.autoScroll(-15, 0);
 
     var groundCache = this.game.cache.getFrame('ground');
-    console.log(" ");
-    console.log("groundCache.height: "+groundCache.height)
 
 //                               o8o      .             
 //                               `"'    .o8             
@@ -89,10 +87,11 @@ BasicGame.Game.prototype = {
 //           888                                        
 //          o888o                                       
                                                      
-    this.player = this.game.add.sprite(this.game.world.centerX, 0, 'blackball');
+    this.player = this.game.add.sprite(this.game.world.centerX, this.game.world.height - groundCache.height / 6, 'blackball');
     this.player.anchor.set(0.5, 0.5);
     this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
     this.game.physics.arcade.enable(this.player);
+    this.player.body.bounce.y = 0.2;
     // this.player.tint = 0xeeeeee;
     this.player.body.collideWorldBounds = true;
     this.player.body.enable = true;
@@ -134,7 +133,7 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
@@ -144,7 +143,7 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
@@ -154,7 +153,7 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
@@ -164,7 +163,7 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
@@ -174,7 +173,7 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
@@ -184,19 +183,19 @@ BasicGame.Game.prototype = {
         
     //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.screenWidth, groundCache.height /2, 'ground');
 
-    //     this.ground2 = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
+    //     this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 4, this.game.screenWidth, groundCache.height /2, 'ground');
 
     //     this.player.scale.setTo(this.game.scaleRatio / 2, this.game.scaleRatio / 2);
     // }
 
     // // iPhone 5 
     // else if(this.game.screenHeight <= 568){
-        
-        // this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.width, groundCache.height /2, 'ground');
 
-        this.ground2 = this.game.add.tileSprite(0, this.game.world.height, this.game.width * 4, groundCache.height / 7, 'ground');
+        this.ground = this.game.add.tileSprite(0, this.game.world.height, this.game.world.width, groundCache.height / 7, 'ground');
 
-        this.player.scale.setTo(this.game.scaleRatio / 4, this.game.scaleRatio / 4);
+        // this.ground2 = this.game.add.tileSprite(0, this.game.world.height - (groundCache.height / 7) - 1025, this.game.world.width, groundCache.height / 42, 'ground');
+
+        this.player.scale.setTo(this.game.scaleRatio / 2.5, this.game.scaleRatio / 2.5);
     // }
 
 // LANDSCAPE MODE
@@ -224,24 +223,24 @@ BasicGame.Game.prototype = {
 // `8oooooo.  d888b    `Y8bod8P'  `V88V"V8P' o888o o888o `Y8bod88P" 
 // d"     YD                                                        
 // "Y88888P'                                                        
-                                                                 
-    // this.ground.anchor.y = 1;
-    // this.game.physics.arcade.enable(this.ground);
-    // this.ground.body.immovable = true;
-    // this.ground.body.moves = false;
-    // this.ground.autoScroll(-200, 0);
+                                                                
+    this.ground.anchor.y = 1;
+    this.game.physics.arcade.enable(this.ground);
+    this.ground.body.immovable = true;
+    this.ground.body.moves = false;
 
-    this.ground2.anchor.y = 1;
-    this.game.physics.arcade.enable(this.ground2);
-    this.ground2.body.immovable = true;
-    this.ground2.body.moves = false;
-    // this.ground2.autoScroll(-30, 0);
+    // this.ground2.anchor.y = 1;
+    // this.game.physics.arcade.enable(this.ground2);
+    // this.ground2.body.immovable = true;
+    // this.ground2.body.moves = false;
+    // this.ground2.collideDown = false;
+
 
    // BORDER OUTLINE
-    // this.bounds = new Phaser.Rectangle(0, 0, this.game.world.width, this.game.world.height - (groundCache.height / 7) - 6);
-    // this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    // this.graphics.lineStyle(40, 0xcccccc, 1);
-    // this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+    this.bounds = new Phaser.Rectangle(0, 0, this.game.world.width, this.game.world.height - (groundCache.height / 7));
+    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
+    this.graphics.lineStyle(2, 0xcccccc, 1);
+    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
 
                                                         
 //  .oooooooo oooo d8b  .ooooo.  oooo  oooo  oo.ooooo.   .oooo.o 
@@ -252,13 +251,25 @@ BasicGame.Game.prototype = {
 // d"     YD                                  888                
 // "Y88888P'                                 o888o               
 
-    // this.tubes = this.game.add.group();
-    // this.tubes.enableBody = true;
-    // this.tubes.createMultiple(24, 'greytube');
-    // this.newtubes = this.game.time.events.loop(1000, this.newTube, this);
-    // this.newtubes.timer.stop(false);               
+//     .                .o8                          
+//   .o8               "888                          
+// .o888oo oooo  oooo   888oooo.   .ooooo.   .oooo.o 
+//   888   `888  `888   d88' `88b d88' `88b d88(  "8 
+//   888    888   888   888   888 888ooo888 `"Y88b.  
+//   888 .  888   888   888   888 888    .o o.  )88b 
+//   "888"  `V88V"V8P'  `Y8bod8P' `Y8bod8P' 8""888P' 
 
-    // this.newtubes.timer.start();
+// Here we are just adding the tubes group and looping them
+    this.tubes = this.game.add.group();
+    this.game.physics.arcade.enable(this.tubes);
+    this.tubes.enableBody = true;
+    this.tubes.createMultiple(500, 'greytube');
+
+// This code will create a loop that calls the addPlatform function every 2 seconds. If you run your game now it should look like this:    
+    this.newtubes = this.game.time.events.loop(1000, this.newTube, this);
+    this.newtubes.timer.stop(false);               
+
+    this.newtubes.timer.start();
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
     this.game.input.onTap.add(this.jump, this);                                           
@@ -279,31 +290,73 @@ BasicGame.Game.prototype = {
                                                                                 
                                                                                
             newTube: function(){
-                
+        
+    var groundCache = this.game.cache.getFrame('ground');
+
                 // var randomPosition = this.game.rnd.integerInRange(120, this.game.height - this.ground.height - 100);
                 
-                // var tube = this.game.cache.getFrame('greytube');
-                
-                // var tube1 = this.tubes.getFirstDead();
-                // tube1.reset(this.game.width + tube.width/2, randomPosition - 100);
-                // tube1.anchor.setTo(0.5, 1);
-                // tube1.scale.set(1.4);
-                // tube1.body.velocity.x = -200;
-                // tube1.body.immovable = true;
-                // tube1.checkWorldBounds = true;
-                // tube1.outOfBoundsKill = true;
-                
-                // var tube2 = this.tubes.getFirstDead();
+                var tube = this.game.cache.getFrame('greytube');
 
-                // tube2.reset(this.game.width + tube.width/2, randomPosition + 100 + tube.height/2);
+    //Get a tile that is not currently on screen
+                var tube1 = this.tubes.getFirstDead();
 
+    //Reset it to the specified coordinates
+                tube1.reset(this.game.world.width, this.game.world.height - (groundCache.height / 7) - 150);
+                tube1.anchor.setTo(0, 0.5);
+                tube1.scale.set(this.game.scaleRatio / 8, this.game.scaleRatio / 37);
+                tube1.body.velocity.x = -250;
+                tube1.body.immovable = true;
+    //When the tile leaves the screen, kill it
+                tube1.checkWorldBounds = true;
+                tube1.outOfBoundsKill = true;
                 
-                // tube2.anchor.setTo(0.5, 0.5);
-                // tube2.scale.setTo(this.game.scaleRatio * 2, this.game.scaleRatio * 2);
-                // tube2.body.velocity.x = -200;
-                // tube2.body.immovable = true;
-                // tube2.checkWorldBounds = true;
-                // tube2.outOfBoundsKill = true;
+                var tube2 = this.tubes.getFirstDead();
+                tube2.reset(0, this.game.world.height - (groundCache.height / 7) - 300);
+                tube2.anchor.setTo(1, .5);
+                tube2.scale.setTo(this.game.scaleRatio / 8, this.game.scaleRatio / 37);
+                tube2.body.velocity.x = 250;
+                tube2.body.immovable = true;
+                tube2.checkWorldBounds = true;
+                tube2.outOfBoundsKill = true;
+
+                var tube3 = this.tubes.getFirstDead();
+                tube3.reset(this.game.world.width, this.game.world.height - (groundCache.height / 7) - 450);
+                tube3.anchor.setTo(0, .5);
+                tube3.scale.setTo(this.game.scaleRatio / 16, this.game.scaleRatio / 37);
+                tube3.body.velocity.x = -250;
+                tube3.body.immovable = true;
+                tube3.checkWorldBounds = true;
+                tube3.outOfBoundsKill = true;
+
+                var tube4 = this.tubes.getFirstDead();
+                tube4.reset(0, this.game.world.height - (groundCache.height / 7) - 600);
+                tube4.anchor.setTo(1, .5);
+                tube4.scale.setTo(this.game.scaleRatio / 16, this.game.scaleRatio / 37);
+                tube4.body.velocity.x = 250;
+                tube4.body.immovable = true;
+                tube4.checkWorldBounds = true;
+                tube4.outOfBoundsKill = true;
+
+                var tube5 = this.tubes.getFirstDead();
+                tube5.reset(this.game.world.width, this.game.world.height - (groundCache.height / 7) - 750);
+                tube5.anchor.setTo(0, .5);
+                tube5.scale.setTo(this.game.scaleRatio / 24, this.game.scaleRatio / 37);
+                tube5.body.velocity.x = -150;
+                tube5.body.immovable = true;
+                tube5.checkWorldBounds = true;
+                tube5.outOfBoundsKill = true;
+
+                var tube6 = this.tubes.getFirstDead();
+                tube6.reset(0, this.game.world.height - (groundCache.height / 7) - 900);
+                tube6.anchor.setTo(1, .5);
+                tube6.scale.setTo(this.game.scaleRatio / 24, this.game.scaleRatio / 37);
+                tube6.body.velocity.x = 100;
+                tube6.body.immovable = true;
+                tube6.checkWorldBounds = true;
+                tube6.outOfBoundsKill = true;
+
+
+
                 
                 // var sensor = this.sensors.create(this.game.width + tube.width, 0);
                 // sensor.body.setSize(40, this.game.height);
@@ -325,10 +378,14 @@ BasicGame.Game.prototype = {
         	update: function () {
         // ROTATE PLAYER
           // this.player.angle += 4;          
-            this.game.physics.arcade.collide(this.player, this.ground2, this.tube2, this.balls, null, this.reflect, this);
+            this.game.physics.arcade.collide(this.player, this.ground, null, this.reflect, this);
+
+  this.game.physics.arcade.collide(this.player, this.tubes);
+  this.game.physics.arcade.collide(this.player, this.ground2);
+
 // PLAYER JUMP
             if(this.game.input.pointer1.isDown && this.player.body.touching.down){
-                this.player.body.velocity.y = -1000;  
+                this.player.body.velocity.y = -1250;  
                 }
             else if(!this.player.body.touching.down && !this.game.input.pointer1.isDown){
                 this.game.input.onTap.add(this.jump, this);     

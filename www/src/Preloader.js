@@ -67,6 +67,7 @@ BasicGame.Preloader.prototype = {
 		this.game.load.image('ground', 'assets/ground.png');
 
 		this.game.load.image('greytube', 'assets/greytube.png')
+		
 		this.game.load.image('spikes', 'assets/spikes.png')
 		this.game.load.image('spikes2', 'assets/spikes2.png')
 		this.game.load.image('spike', 'assets/spike.png')
