@@ -73,13 +73,7 @@ BasicGame.Game.prototype = {
 
     // BACKGROUND
     this.background = this.game.add.tileSprite(0, 0, this.game.world.width * 4, this.game.world.height , 'backgroundscene');
-    // this.background.autoScroll(-30, 0);
-
-   // BORDER OUTLINE
-    this.bounds = new Phaser.Rectangle(0, 0, this.game.world.width, this.game.world.height);
-    this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
-    this.graphics.lineStyle(8, 0x000000, 1);
-    this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+    this.background.autoScroll(-15, 0);
 
     var groundCache = this.game.cache.getFrame('ground');
     console.log(" ");
@@ -104,9 +98,17 @@ BasicGame.Game.prototype = {
     this.player.body.enable = true;
     this.player.enableBody = true;
     this.player.checkWorldBounds = true;
-    // this.player.body.gravity.y = 4800;   
+    // this.player.body.gravity.y = 4800;
+
+
+//  .ooooo.   .oooo.   ooo. .oo.  .oo.    .ooooo.  oooo d8b  .oooo.   
+// d88' `"Y8 `P  )88b  `888P"Y88bP"Y88b  d88' `88b `888""8P `P  )88b  
+// 888        .oP"888   888   888   888  888ooo888  888      .oP"888  
+// 888   .o8 d8(  888   888   888   888  888    .o  888     d8(  888  
+// `Y8bod8P' `Y888""8o o888o o888o o888o `Y8bod8P' d888b    `Y888""8o 
 
     this.game.camera.follow(this.player);
+
 
 //   .oooooo.                                    .o8   o8o            
 //  d'     `b                                   "888   `"'            
@@ -192,7 +194,7 @@ BasicGame.Game.prototype = {
         
         // this.ground = this.game.add.tileSprite(0, this.game.screenHeight / 1.2, this.game.width, groundCache.height /2, 'ground');
 
-        this.ground2 = this.game.add.tileSprite(0, this.game.world.height, this.game.width * 4, groundCache.height /2, 'ground');
+        this.ground2 = this.game.add.tileSprite(0, this.game.world.height, this.game.width * 4, groundCache.height / 7, 'ground');
 
         this.player.scale.setTo(this.game.scaleRatio / 4, this.game.scaleRatio / 4);
     // }
@@ -233,7 +235,14 @@ BasicGame.Game.prototype = {
     this.game.physics.arcade.enable(this.ground2);
     this.ground2.body.immovable = true;
     this.ground2.body.moves = false;
-    // this.ground2.autoScroll(-200, 0);
+    // this.ground2.autoScroll(-30, 0);
+
+   // BORDER OUTLINE
+    // this.bounds = new Phaser.Rectangle(0, 0, this.game.world.width, this.game.world.height - (groundCache.height / 7) - 6);
+    // this.graphics = this.game.add.graphics(this.bounds.x, this.bounds.y);
+    // this.graphics.lineStyle(40, 0xcccccc, 1);
+    // this.graphics.drawRect(0, 0, this.bounds.width, this.bounds.height);
+
                                                         
 //  .oooooooo oooo d8b  .ooooo.  oooo  oooo  oo.ooooo.   .oooo.o 
 // 888' `88b  `888""8P d88' `88b `888  `888   888' `88b d88(  "8 
@@ -326,10 +335,12 @@ BasicGame.Game.prototype = {
             }  
             else{this.player.body.gravity.y = 4000;}
 
-            if(this.cursors.left.isDown){this.player.body.velocity.x = -1000;}
-            else if(this.cursors.right.isDown){this.player.body.velocity.x = 1000;}
-            else if(this.cursors.up.isDown){this.player.body.velocity.y = -1000;}
+            if(this.cursors.left.isDown){this.player.body.velocity.x = -500;}
+            else if(this.cursors.right.isDown){this.player.body.velocity.x = 500;}
+            else if(this.cursors.up.isDown){this.player.body.velocity.y = -500;}
             else{this.player.body.gravity.y = 4000; this.player.body.velocity.x = 0;}
+
+        this.game.world.bringToTop(this.player);
 
 }, // END UPDATE
 
