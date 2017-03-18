@@ -97,6 +97,7 @@ BasicGame.Game.prototype = {
     this.player.body.enable = true;
     this.player.enableBody = true;
     this.player.checkWorldBounds = true;
+    this.player.body.immovable = false;
     // this.player.body.gravity.y = 4800;
 
 
@@ -107,7 +108,7 @@ BasicGame.Game.prototype = {
 // `Y8bod8P' `Y888""8o o888o o888o o888o `Y8bod8P' d888b    `Y888""8o 
 
     this.game.camera.follow(this.player);
-
+                                                          
 
 //   .oooooo.                                    .o8   o8o            
 //  d'     `b                                   "888   `"'            
@@ -260,21 +261,65 @@ BasicGame.Game.prototype = {
 //   "888"  `V88V"V8P'  `Y8bod8P' `Y8bod8P' 8""888P' 
 
 // Here we are just adding the tubes group and looping them
+    
+    this.tubesHalf = this.game.add.group();
+    this.game.physics.arcade.enable(this.tubesHalf);
+    this.tubesHalf.enableBody = true;
+    this.tubesHalf.createMultiple(1000, 'greytube');
+
+    this.newtubes = this.game.time.events.loop(500, this.halfSecond, this);
+    this.newtubes.timer.stop(false);               
+    this.newtubes.timer.start();
+
+
     this.tubes = this.game.add.group();
     this.game.physics.arcade.enable(this.tubes);
     this.tubes.enableBody = true;
-    this.tubes.createMultiple(500, 'greytube');
+    this.tubes.createMultiple(1000, 'greytube');
 
-// This code will create a loop that calls the addPlatform function every 2 seconds. If you run your game now it should look like this:    
-    this.newtubes = this.game.time.events.loop(1000, this.newTube, this);
+    this.newtubes = this.game.time.events.loop(1000, this.oneSecond, this);
     this.newtubes.timer.stop(false);               
-
     this.newtubes.timer.start();
+
+
+    this.tubesTwo = this.game.add.group();
+    this.game.physics.arcade.enable(this.tubesTwo);
+    this.tubesTwo.enableBody = true;
+    this.tubesTwo.createMultiple(1000, 'greytube');
+
+    this.newtubesTwo = this.game.time.events.loop(2000, this.twoSecond, this);
+    this.newtubesTwo.timer.stop(false);               
+    this.newtubesTwo.timer.start();
+
+    this.sensors = this.game.add.group();
+    this.sensors.enableBody = true;
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
     this.game.input.onTap.add(this.jump, this);                                           
     // this.START = false;
 
+//  .oooo.o  .ooooo.   .ooooo.  oooo d8b  .ooooo.  
+// d88(  "8 d88' `"Y8 d88' `88b `888""8P d88' `88b 
+// `"Y88b.  888       888   888  888     888ooo888 
+// o.  )88b 888   .o8 888   888  888     888    .o 
+// 8""888P' `Y8bod8P' `Y8bod8P' d888b    `Y8bod8P' 
+
+    this.graphics = this.game.add.graphics(0, this.game.world.centerY / 19);
+    this.graphics.fixedToCamera = true;
+    // this.graphics.lineStyle(2, 0xeeeeee, 1);
+    this.graphics.beginFill(0xeeeeee, 0.8);
+    this.graphics.drawRect(0, 0, this.game.world.width, 100);
+    this.graphics.endFill();
+                                                                                        
+    this.scoreText = this.game.add.text(this.game.world.centerX, this.game.world.centerY / 10, "0", { font: "60px Arial", fill: "#000000" }); 
+    this.scoreText.anchor.set(0.5);
+    this.scoreText.fixedToCamera = true;   
+
+    this.sensor = this.sensors.create(0, this.game.world.height - (groundCache.height / 7) - 170);
+    this.sensor.body.setSize(this.game.world.width, 10);
+    this.sensor.body.velocity.y = 0;
+    this.sensor.body.immovable = true;
+    this.sensor.alpha = 0;
 
 }, // END CREATE
 // ====================================================
@@ -287,26 +332,24 @@ BasicGame.Game.prototype = {
 //  888   888  888    .o    `888'`888'      888 .  888   888   888   888 888    .o 
 // o888o o888o `Y8bod8P'     `8'  `8'       "888"  `V88V"V8P'  `Y8bod8P' `Y8bod8P' 
                                                                                 
-                                                                                
-                                                                               
-            newTube: function(){
+            halfSecond: function(){
         
-    var groundCache = this.game.cache.getFrame('ground');
+                var groundCache = this.game.cache.getFrame('ground');
 
-                // var randomPosition = this.game.rnd.integerInRange(120, this.game.height - this.ground.height - 100);
-                
-                var tube = this.game.cache.getFrame('greytube');
 
-    //Get a tile that is not currently on screen
+            },                                                                                
+                                                                               
+            oneSecond: function(){
+        
+                var groundCache = this.game.cache.getFrame('ground');
+
                 var tube1 = this.tubes.getFirstDead();
 
-    //Reset it to the specified coordinates
                 tube1.reset(this.game.world.width, this.game.world.height - (groundCache.height / 7) - 150);
                 tube1.anchor.setTo(0, 0.5);
                 tube1.scale.set(this.game.scaleRatio / 8, this.game.scaleRatio / 37);
                 tube1.body.velocity.x = -250;
                 tube1.body.immovable = true;
-    //When the tile leaves the screen, kill it
                 tube1.checkWorldBounds = true;
                 tube1.outOfBoundsKill = true;
                 
@@ -350,19 +393,27 @@ BasicGame.Game.prototype = {
                 tube6.reset(0, this.game.world.height - (groundCache.height / 7) - 900);
                 tube6.anchor.setTo(1, .5);
                 tube6.scale.setTo(this.game.scaleRatio / 24, this.game.scaleRatio / 37);
-                tube6.body.velocity.x = 100;
+                tube6.body.velocity.x = 150;
                 tube6.body.immovable = true;
                 tube6.checkWorldBounds = true;
                 tube6.outOfBoundsKill = true;
 
+                var tube7 = this.tubes.getFirstDead();
+                tube7.reset(this.game.world.width, this.game.world.height - (groundCache.height / 7) - 1050);
+                tube7.anchor.setTo(0, .5);
+                tube7.scale.setTo(this.game.scaleRatio / 24, this.game.scaleRatio / 37);
+                tube7.body.velocity.x = -100;
+                tube7.body.immovable = true;
+                tube7.checkWorldBounds = true;
+                tube7.outOfBoundsKill = true;
+
+            },
+
+            twoSecond: function(){
+        
+                var groundCache = this.game.cache.getFrame('ground');
 
 
-                
-                // var sensor = this.sensors.create(this.game.width + tube.width, 0);
-                // sensor.body.setSize(40, this.game.height);
-                // sensor.body.velocity.x = -180;
-                // sensor.body.immovable = true;
-                // sensor.alpha = 0;
             },
                                                                                                                      
 //                              .o8                .             
@@ -379,23 +430,23 @@ BasicGame.Game.prototype = {
         // ROTATE PLAYER
           // this.player.angle += 4;          
             this.game.physics.arcade.collide(this.player, this.ground, null, this.reflect, this);
-
-  this.game.physics.arcade.collide(this.player, this.tubes);
-  this.game.physics.arcade.collide(this.player, this.ground2);
+            this.game.physics.arcade.collide(this.player, this.tubes);
+            this.game.physics.arcade.collide(this.player, this.tubesTwo);
+            this.game.physics.arcade.overlap(this.player, this.sensors, this.incrementScore, null, this); 
 
 // PLAYER JUMP
             if(this.game.input.pointer1.isDown && this.player.body.touching.down){
-                this.player.body.velocity.y = -1250;  
+                this.player.body.velocity.y = -1100;  
                 }
             else if(!this.player.body.touching.down && !this.game.input.pointer1.isDown){
                 this.game.input.onTap.add(this.jump, this);     
             }  
-            else{this.player.body.gravity.y = 4000;}
+            else{this.player.body.gravity.y = 3500;}
 
             if(this.cursors.left.isDown){this.player.body.velocity.x = -500;}
             else if(this.cursors.right.isDown){this.player.body.velocity.x = 500;}
             else if(this.cursors.up.isDown){this.player.body.velocity.y = -500;}
-            else{this.player.body.gravity.y = 4000; this.player.body.velocity.x = 0;}
+            else{this.player.body.gravity.y = 3000; this.player.body.velocity.x = 0;}
 
         this.game.world.bringToTop(this.player);
 
@@ -423,11 +474,19 @@ BasicGame.Game.prototype = {
 //  888     888    .o  888   888  888   888  888    .o  888     
 // d888b    `Y8bod8P' o888o o888o `Y8bod88P" `Y8bod8P' d888b    
                                                                                                                                                                                       
+            incrementScore: function(player, sensor){
+                sensor.kill();
+                this.totalScore++;
+                this.scoreText.setText(this.totalScore);
+                // this.pointAudio.play();
+            },
+
             render: function() {
 
         //Pixel Art
-        this.game.renderer.renderSession.roundPixels = false;
-        this.game.time.desiredFps = 60;
+                this.sensors && this.sensors.forEachAlive(function(sensor){
+                    this.game.debug.body(sensor, 'rgba(0, 255, 0, 0.5)');
+                }, this);
 
             },
 
